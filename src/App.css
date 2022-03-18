@@ -1,0 +1,30 @@
+body {
+  font-family: 'Fredoka', sans-serif;
+  background-color: #282c34;
+  color: #ffffff;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+.message-wrapper {
+  position: relative;
+  display: block;
+}
+
+.message {
+  animation: message-incomming 1.3s ease-in-out;
+  margin: 0.5em 0;
+  max-width: 100%;
+}
+
+@keyframes message-incomming {
+  from {
+    margin-left: -100vw;
+  }
+
+  to {
+    margin-left: 0vw;
+  }
+}
