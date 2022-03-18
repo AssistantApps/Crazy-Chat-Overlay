@@ -1,75 +1,45 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { ChatMessageTile } from './component/chatMessageTile';
-import { ChatMessage } from './contract/chatMessage';
-import './App.css';
-const tmi = require('tmi.js');
+import { useState, useEffect } from "react";
+import { Router, Route } from "wouter";
+import { ChakraProvider, DarkMode } from '@chakra-ui/react';
 
-const maxNumMessages = 50;
+import { Routes } from "./constant/routes";
+import { theme } from "./constant/theme";
+import { DisplayPage } from "./pages/display";
+import { HomePage } from "./pages/homePage";
+import { SettingPage } from "./pages/settingPage";
+import { AppShell } from "./component/appShell";
 
 export const App: React.FC = () => {
-  const [messages, setMessages] = useState<Array<ChatMessage>>([]);
-  const messagesEnd: any = useRef(null);
+  const currentLocation = () => {
+    return window.location.hash.replace(/^#/, "") || "/";
+  };
 
-  useEffect(() => {
-    const client = new tmi.Client({
-      options: { debug: true, messagesLogLevel: "info" },
-      connection: {
-        reconnect: true,
-        secure: true
-      },
-      channels: ['zilioner']
-    });
+  const navigate = (to: string) => (window.location.hash = to);
 
-    client.connect().catch(console.error);
+  const useHashLocation: any = () => {
+    const [loc, setLoc] = useState(currentLocation());
 
-    client.on('message', (channel: any, tags: any, message: any, self: any) => {
-      // "Alca: Hello, World!"
-      // console.log(`${tags['display-name']}: ${message}`);
-      // console.log('tags', tags);
-      // console.log('message', message);
+    useEffect(() => {
+      const handler = () => setLoc(currentLocation());
 
-      const newMessage: ChatMessage = {
-        id: tags.id,
-        userId: tags['user-id'],
-        username: tags['display-name'] ?? tags.username,
-        colour: tags.color,
-        mod: tags.mod,
-        subscriber: tags.subscriber,
-        emotes: tags.emotes,
-        message,
-      };
-      addToMessageArray(newMessage);
-      messagesEnd.current?.scrollIntoView({ behavior: "smooth" });
-    });
+      window.addEventListener("hashchange", handler);
+      return () => window.removeEventListener("hashchange", handler);
+    }, []);
 
-    return () => {
-      client.disconnect('Goodbye.');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const addToMessageArray = (newMessage: ChatMessage) => {
-    setMessages(msgs => {
-      let startIndex = msgs.length - maxNumMessages;
-      if (startIndex < 0) startIndex = 0;
-
-      const oldMsgs = msgs.slice(startIndex, maxNumMessages - 1)
-      return [...oldMsgs, newMessage];
-    });
-  }
+    return [loc, navigate];
+  };
 
   return (
-    <div className="message-list">
-      {
-        messages.map((chatM, i) => (
-          <ChatMessageTile
-            key={chatM.id}
-            msg={chatM}
-          />
-        ))
-      }
-      <br />
-      <div ref={messagesEnd}></div>
-    </div>
+    <ChakraProvider theme={theme}>
+      <DarkMode>
+        <AppShell>
+          <Router hook={useHashLocation}>
+            <Route path={Routes.home} component={HomePage} />
+            <Route path={Routes.display} component={DisplayPage} />
+            <Route path={Routes.setting} component={SettingPage} />
+          </Router>
+        </AppShell>
+      </DarkMode>
+    </ChakraProvider>
   );
 }

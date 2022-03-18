@@ -1,11 +1,8 @@
 import React from 'react';
-import { ChatMessage } from '../contract/chatMessage';
+import { IChatMessageTilePresenterProps } from './chatMessageProps';
 
-interface IProps {
-    msg: ChatMessage;
-}
 
-export const ChatMessageTile: React.FC<IProps> = (props: IProps) => {
+export const ChatMessageTile: React.FC<IChatMessageTilePresenterProps> = (props: IChatMessageTilePresenterProps) => {
     return (
         <div className="message-wrapper">
             <p key={props.msg.id} className="message">

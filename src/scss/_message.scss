@@ -1,0 +1,25 @@
+.message-wrapper {
+    position: relative;
+    display: block;
+}
+
+.message-list {
+    max-height: 100%;
+    overflow: hidden;
+}
+
+.message {
+    animation: message-incomming 1.3s ease-in-out;
+    margin: 0.5em 0;
+    max-width: 100%;
+}
+
+@keyframes message-incomming {
+    from {
+        margin-left: -100vw;
+    }
+
+    to {
+        margin-left: 0vw;
+    }
+}
