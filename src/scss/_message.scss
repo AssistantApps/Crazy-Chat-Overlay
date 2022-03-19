@@ -1,3 +1,7 @@
+@import 'tiles/defaultTile';
+@import 'tiles/chatAppTile';
+@import 'tiles/restream';
+
 .message-wrapper {
     position: relative;
     display: block;
@@ -10,7 +14,6 @@
 
 .message {
     animation: message-incomming 1.3s ease-in-out;
-    margin: 0.5em 0;
     max-width: 100%;
 }
 

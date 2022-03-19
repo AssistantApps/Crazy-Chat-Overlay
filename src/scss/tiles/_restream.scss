@@ -1,0 +1,38 @@
+.restream-tile {
+    margin: 0.5em;
+    display: flex;
+    padding: 1em;
+    background-color: rgba(36, 56, 88, 0.8);
+    border-radius: 1em;
+
+    .avatar {
+        margin-top: 0.5em;
+        margin-right: 0.5em;
+
+        img {
+            width: 25px;
+            height: 25px;
+            max-width: unset;
+            border-radius: 100%;
+        }
+    }
+
+    .content {
+        flex-grow: 1;
+
+        .msg-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .name {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .time {
+            font-size: 0.85em;
+        }
+    }
+}

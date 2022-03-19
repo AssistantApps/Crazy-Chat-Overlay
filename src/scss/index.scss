@@ -1,8 +1,15 @@
+@import "./vars";
+@import "./functions";
+@import "./layout";
 @import "./message";
 
 body {
   background-color: #282c34;
   color: #ffffff;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 *::-webkit-scrollbar {

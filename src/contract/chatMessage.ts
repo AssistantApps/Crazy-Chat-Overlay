@@ -7,4 +7,5 @@ export interface ChatMessage {
     emotes: Array<string>;
     mod: boolean;
     subscriber: boolean;
+    date: Date;
 }

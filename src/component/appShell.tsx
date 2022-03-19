@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { Box } from '@chakra-ui/react';
+import { Navbar } from "./layout/navbar";
 
 interface IProps {
     children: ReactNode;
@@ -8,8 +9,11 @@ interface IProps {
 export const AppShell: React.FC<IProps> = (props: IProps) => {
 
     return (
-        <Box>
-            {props.children}
-        </Box>
+        <>
+            <Navbar />
+            <Box className="content">
+                {props.children}
+            </Box>
+        </>
     );
 }

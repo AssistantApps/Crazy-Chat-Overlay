@@ -1,14 +1,20 @@
-import { Box, Center, Container, Flex, Square, Text } from '@chakra-ui/react';
+import { Box, Container, Flex } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { ChatListView } from '../component/chat/listView';
 import { SettingsPanel } from '../component/settingsPanel';
 import { MessageTileType } from '../constant/messageTileType';
 import { ChatMessage } from '../contract/chatMessage';
+import { ChatSetting } from '../contract/chatSettings';
 
 const Jabber = require('jabber');
 
 export const SettingPage: React.FC = () => {
+    const [jabber] = useState<any>(new Jabber());
     const [messages, setMessages] = useState<Array<ChatMessage>>([]);
+    const [settings, setSettings] = useState<ChatSetting>({
+        twitchChannel: 'khaoztopsy',
+        messageTileType: MessageTileType.Default,
+    });
 
     const colours = [
         undefined,
@@ -21,7 +27,7 @@ export const SettingPage: React.FC = () => {
     ];
 
     useEffect(() => {
-        addMessage();
+        Array(3).fill(0).map((_, indx) => setTimeout(addMessage, indx * 10));
         const intervalId = setInterval(addMessage, 2500);
 
         return () => {
@@ -31,9 +37,12 @@ export const SettingPage: React.FC = () => {
     }, []);
 
     const addMessage = () => {
-        const jabber = new Jabber();
+        const newMessage = generateMessage();
+        setMessages(msgs => [...msgs, newMessage]);
+    }
 
-        const msgMessage = jabber.createParagraph(Math.floor(Math.random() * 20));
+    const generateMessage = (): ChatMessage => {
+        const msgMessage = jabber.createParagraph(Math.floor(Math.random() * 20) + 3);
         const newMessage: ChatMessage = {
             id: msgMessage,
             userId: jabber.createParagraph(30),
@@ -43,21 +52,25 @@ export const SettingPage: React.FC = () => {
             mod: (Math.floor(Math.random() * colours.length) > 9),
             subscriber: (Math.floor(Math.random() * colours.length) > 6),
             emotes: [],
+            date: new Date(),
         };
-        setMessages(msgs => [...msgs, newMessage])
+        return newMessage;
     }
 
     return (
-        <Flex style={{ height: '100vh' }}>
+        <Flex className="full-height-without-nav">
             <Box flexGrow={3}>
-                <Container pt={2}>
-                    <SettingsPanel />
+                <Container pt={3}>
+                    <SettingsPanel
+                        settings={settings}
+                        setSettings={setSettings}
+                    />
                 </Container>
             </Box>
-            <Box flexGrow={1} style={{ maxHeight: '100vh', maxWidth: '400px' }}>
+            <Box flexGrow={1} style={{ height: '100%', maxWidth: '400px' }}>
                 <ChatListView
                     messageList={messages}
-                    messageTileType={MessageTileType.Default}
+                    messageTileType={settings.messageTileType}
                 />
             </Box>
         </Flex>

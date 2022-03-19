@@ -1,0 +1,8 @@
+#header {
+    line-height: _size(header-height);
+    height: _size(header-height);
+}
+
+.full-height-without-nav {
+    height: calc(100vh - _size(header-height));
+}
