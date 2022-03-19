@@ -1,5 +1,6 @@
 import React from 'react';
 import { formatDate } from '../../../helper/dateHelper';
+import { LazyLoadImage } from '../../lazyLoadImage/lazyLoadImage';
 import { IChatMessageTilePresenterProps } from './chatMessageProps';
 
 
@@ -8,7 +9,11 @@ export const RestreamChatMessageTile: React.FC<IChatMessageTilePresenterProps> =
         <div key={props.msg.id} className="message-wrapper">
             <div className="restream-tile">
                 <div className="avatar">
-                    <img src={`https://ui-avatars.com/api/?name=${props.msg.username}`} alt={props.msg.username} />
+                    <LazyLoadImage
+                        src={`https://api.assistantapps.com/Twitch/UserImage/${props.msg.userId}`}
+                        notFoundImageSrc={`https://ui-avatars.com/api/?name=${props.msg.username}`}
+                        alt={props.msg.username}
+                    />
                 </div>
                 <div className="content">
                     <div className="msg-info">

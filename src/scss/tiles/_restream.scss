@@ -1,12 +1,12 @@
 .restream-tile {
     margin: 0.5em;
     display: flex;
-    padding: 1em;
+    padding: 1em 1em 1em 0.5em;
     background-color: rgba(36, 56, 88, 0.8);
     border-radius: 1em;
 
     .avatar {
-        margin-top: 0.5em;
+        margin-top: 0.75em;
         margin-right: 0.5em;
 
         img {

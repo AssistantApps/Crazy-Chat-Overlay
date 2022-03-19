@@ -24,7 +24,6 @@ export const SettingsPanel: React.FC<IProps> = (props: IProps) => {
 
     const messageTileOnChange = (e: any) => {
         const newValue = getValue(e);
-        console.log(newValue)
         if (newValue == null) return;
         if (isNaN(newValue as any)) return;
 

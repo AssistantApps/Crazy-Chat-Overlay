@@ -48,7 +48,10 @@ export const DisplayPage: React.FC = () => {
 
     const addToMessageArray = (newMessage: ChatMessage) => {
         setMessages(msgs => {
-            const oldMsgs = msgs.slice(0, maxNumMessages - 1)
+            let startIndex = (msgs.length - maxNumMessages) + 1
+            if (startIndex < 0) startIndex = 0;
+
+            const oldMsgs = msgs.slice(startIndex, maxNumMessages)
             return [...oldMsgs, newMessage];
         });
     }

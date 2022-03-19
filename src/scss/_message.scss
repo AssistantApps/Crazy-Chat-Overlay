@@ -12,11 +12,6 @@
     overflow: hidden;
 }
 
-.message {
-    animation: message-incomming 1.3s ease-in-out;
-    max-width: 100%;
-}
-
 @keyframes message-incomming {
     from {
         margin-left: -100vw;

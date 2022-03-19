@@ -10,7 +10,7 @@ export const settingsToQueryParams = (setting: ChatSetting): string => {
     }
 
     if (setting.messageTileType !== 0) {
-        params.push('messageTileType=' + setting.messageTileType);
+        params.push('messageTileType=' + MessageTileType[setting.messageTileType].toString());
     }
 
     return (params.length > 0 ? '?' : '') + params.join('&');
