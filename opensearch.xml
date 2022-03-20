@@ -1,0 +1,11 @@
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
+  xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+  <ShortName>Crazy Chat Overlay by AssistantApps</ShortName>
+  <Description>This web page allows you to customize your chat overlay for use in Streamlabs or OBS browser source.</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Image width="16" height="16" type="image/x-icon">https://assistantapps.github.io/Crazy-Chat-Overlay/favicon.ico</Image>
+  <Url type="text/html" template="https://assistantapps.github.io/Crazy-Chat-Overlay/?q={searchTerms}">
+    <Param name="searchTerms" value="{searchTerms}" />
+  </Url>
+  <Url type="application/x-suggestions+json" template="https://assistantapps.github.io/Crazy-Chat-Overlay/?q={searchTerms}" />
+</OpenSearchDescription>
