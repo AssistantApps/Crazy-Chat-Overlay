@@ -15,7 +15,7 @@ export const Navbar: React.FC = () => {
     return (
         <div className={classNames({ 'is-menu-visible': isOpen })}>
             <header id="header">
-                <a href="index.html" className="logo">
+                <a href="/" className="logo">
                     <strong>Crazy Chat Overlay</strong>&nbsp;<span>by AssistantApps</span>
                 </a>
                 <img src="https://assistantapps.com/assets/favicon/apple-icon-60x60.png" alt="AssistantApps logo" />
