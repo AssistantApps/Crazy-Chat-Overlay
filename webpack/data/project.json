@@ -1,0 +1,86 @@
+{
+    "rootUrl": "https://assistantapps.github.io/Crazy-Chat-Overlay/",
+    "kurt": {
+        "name": "Kurt Lourens",
+        "email": "mailto:hi@kurtlourens.com",
+        "website": "https://kurtlourens.com",
+        "image": "https://kurtlourens.com/assets/images/KurtAvatar.svg",
+        "location": "Almere, The Netherlands",
+        "additionalName": "KhaozTopsy",
+        "twitter": "@KhaozTopsy"
+    },
+    "theme": {
+        "colour": "#ff0000",
+        "maskColour": "#ff0000",
+        "appleStatusBar": "#ff0000"
+    },
+    "meta": {
+        "appName": "Crazy Chat Overlay by AssistantApps",
+        "title": "Crazy Chat Overlay by AssistantApps",
+        "description": "This web page allows you to customize your chat overlay for use in Streamlabs or OBS browser source."
+    },
+    "preconnectLinks": [
+        "https://fonts.googleapis.com"
+    ],
+    "subtitle": "No Man's Sky Adventures with",
+    "footer": "Get in touch",
+    "footerDescription": "Feel free to subscribe to the channel and join us in a live stream or two!",
+    "twitter": {
+        "handle": "@AssistantNMS",
+        "imageAlt": "Logo of the Assistant Apps",
+        "metaImageSize": "summary_large_image"
+    },
+    "images": {
+        "maskIcon": "/safari-pinned-tab.svg",
+        "favicon": {
+            "ico": "assets/favicon/favicon.ico",
+            "x16": "assets/favicon/favicon-16x16.png",
+            "x32": "assets/favicon/favicon-32x32.png",
+            "x96": "assets/favicon/favicon-96x96.png",
+            "x192": "assets/favicon/android-icon-192x192.png"
+        },
+        "apple": {
+            "x76": "assets/images/pwa/KurtAvatar76.png",
+            "x120": "assets/images/pwa/KurtAvatar120.png",
+            "x128": "assets/images/pwa/KurtAvatar128.png",
+            "x152": "assets/images/pwa/KurtAvatar152.png",
+            "x192": "assets/images/pwa/KurtAvatar192.png",
+            "x256": "assets/images/pwa/KurtAvatar256.png",
+            "x512": "assets/images/pwa/KurtAvatar512.png"
+        },
+        "twitter": "https://www.mugshotbot.com/m?mode=dark&color=red&pattern=bubbles&url=https://khaoz-topsy.github.io/CaptSteveWebsite",
+        "facebook": "https://www.mugshotbot.com/m?mode=dark&color=red&pattern=bubbles&url=https://khaoz-topsy.github.io/CaptSteveWebsite"
+    },
+    "redirects": [
+        {
+            "pattern": "Discord",
+            "url": "https://discord.gg/q3aFBQM"
+        },
+        {
+            "pattern": "Github",
+            "url": "https://github.com/AssistantApps"
+        },
+        {
+            "pattern": "Kurt",
+            "url": "https://kurtlourens.com"
+        }
+    ],
+    "headers": [
+        {
+            "name": "Content-Security-Policy",
+            "value": "default-src 'none'; script-src 'self' 'report-sample' 'unsafe-inline' gitcdn.xyz hcaptcha.com newassets.hcaptcha.com platform.twitter.com cdn.syndication.twimg.com www.google-analytics.com; style-src 'self' 'report-sample' 'unsafe-inline' nmscd.github.io fonts.googleapis.com platform.twitter.com; img-src 'self' data: gitcdn.xyz github-readme-stats.vercel.app raw.githubusercontent.com kurtlourens.com cdn.assistantapps.com blog.kurtlourens.com khaoznet.visualstudio.com vsrm.dev.azure.com khaoznet.vsrm.visualstudio.com abs.twimg.com pbs.twimg.com; font-src 'self' data: nmscd.github.io fonts.gstatic.com; connect-src kurtlourens.com api.assistantapps.com playground.kurtlourens.com; manifest-src https://kurtlourens.com/manifest.json https://playground.kurtlourens.com/manifest.json; base-uri 'self'; form-action 'none'; report-uri 'none'; frame-src discord.com www.google.com api.assistantapps.com api.nmsassistant.com app.nmsassistant.com scrapassistant.com api.scrapassistant.com kurtlourens.com monitor.kurtlourens.com presentation.kurtlourens.com open.spotify.com cristurm.github.io culture.entelect.co.za newassets.hcaptcha.com github1s.com platform.twitter.com; frame-ancestors app.nmsassistant.com kurtlourens.com; upgrade-insecure-requests;"
+        },
+        {
+            "name": "X-Content-Security-Policy",
+            "value": "default-src 'none'; script-src 'self' 'report-sample' 'unsafe-inline' gitcdn.xyz hcaptcha.com newassets.hcaptcha.com platform.twitter.com cdn.syndication.twimg.com www.google-analytics.com; style-src 'self' 'report-sample' 'unsafe-inline' nmscd.github.io fonts.googleapis.com platform.twitter.com; img-src 'self' data: gitcdn.xyz github-readme-stats.vercel.app raw.githubusercontent.com kurtlourens.com cdn.assistantapps.com blog.kurtlourens.com khaoznet.visualstudio.com vsrm.dev.azure.com khaoznet.vsrm.visualstudio.com abs.twimg.com pbs.twimg.com; font-src 'self' data: nmscd.github.io fonts.gstatic.com; connect-src kurtlourens.com api.assistantapps.com playground.kurtlourens.com; manifest-src https://kurtlourens.com/manifest.json https://playground.kurtlourens.com/manifest.json; base-uri 'self'; form-action 'none'; report-uri 'none'; frame-src discord.com www.google.com api.assistantapps.com api.nmsassistant.com app.nmsassistant.com scrapassistant.com api.scrapassistant.com kurtlourens.com monitor.kurtlourens.com presentation.kurtlourens.com open.spotify.com cristurm.github.io culture.entelect.co.za newassets.hcaptcha.com github1s.com platform.twitter.com; frame-ancestors app.nmsassistant.com kurtlourens.com; upgrade-insecure-requests;"
+        },
+        {
+            "name": "X-WebKit-CSP",
+            "value": "default-src 'none'; script-src 'self' 'report-sample' 'unsafe-inline' gitcdn.xyz hcaptcha.com newassets.hcaptcha.com platform.twitter.com cdn.syndication.twimg.com www.google-analytics.com; style-src 'self' 'report-sample' 'unsafe-inline' nmscd.github.io fonts.googleapis.com platform.twitter.com; img-src 'self' data: gitcdn.xyz github-readme-stats.vercel.app raw.githubusercontent.com kurtlourens.com cdn.assistantapps.com blog.kurtlourens.com khaoznet.visualstudio.com vsrm.dev.azure.com khaoznet.vsrm.visualstudio.com abs.twimg.com pbs.twimg.com; font-src 'self' data: nmscd.github.io fonts.gstatic.com; connect-src kurtlourens.com api.assistantapps.com playground.kurtlourens.com; manifest-src https://kurtlourens.com/manifest.json https://playground.kurtlourens.com/manifest.json; base-uri 'self'; form-action 'none'; report-uri 'none'; frame-src discord.com www.google.com api.assistantapps.com api.nmsassistant.com app.nmsassistant.com scrapassistant.com api.scrapassistant.com kurtlourens.com monitor.kurtlourens.com presentation.kurtlourens.com open.spotify.com cristurm.github.io culture.entelect.co.za newassets.hcaptcha.com github1s.com platform.twitter.com; frame-ancestors app.nmsassistant.com kurtlourens.com; upgrade-insecure-requests;"
+        },
+        {
+            "name": "Set-Cookie",
+            "value": "cross-site-cookie=name; SameSite=None; Secure"
+        }
+    ]
+}

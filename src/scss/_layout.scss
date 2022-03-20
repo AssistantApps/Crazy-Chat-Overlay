@@ -1,6 +1,14 @@
 #header {
     line-height: _size(header-height);
     height: _size(header-height);
+
+    >.logo {
+        padding-right: 0.25em;
+    }
+
+    img {
+        padding: 1em 0;
+    }
 }
 
 .full-height-without-nav {

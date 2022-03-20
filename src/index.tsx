@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './app';
-import './scss/index.scss';
 import './scss/forty/main.scss';
+import './scss/index.scss';
 
 const reactApp = (
   <React.StrictMode>

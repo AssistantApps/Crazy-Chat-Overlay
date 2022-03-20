@@ -22,7 +22,7 @@ export const HomePage: React.FC = () => {
                         <img src="images/pic07.jpg" alt="" />
                     </span>
                     <header className="major">
-                        <h1>Customizable chat overlays!</h1>
+                        <h1>Crazy Chat Overlays!</h1>
                     </header>
                     <div className="content">
                         <p>
