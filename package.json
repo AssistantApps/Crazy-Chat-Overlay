@@ -1,6 +1,6 @@
 {
   "name": "my-app",
-  "version": "0.1.06",
+  "version": "0.1.7",
   "private": true,
   "homepage": "https://assistantapps.github.io/Crazy-Chat-Overlay",
   "scripts": {
@@ -10,6 +10,7 @@
     "gh:deploy": "gh-pages -d build",
     "build": "npm-run-all --sequential build:*",
     "buildtodo": "npm-run-all --sequential build:* publish:*",
+    "build:version": "npm version patch",
     "build:meta": "webpack --progress --profile --mode production",
     "build:bundle": "react-scripts build",
     "publish:minify": "node webpack/node/minifyPublicFiles.js"
