@@ -1,4 +1,5 @@
 import { MessageTileType } from "../constant/messageTileType";
+import { Routes } from "../constant/routes";
 import { ChatSetting } from "../contract/chatSettings";
 import { anyObject } from "../helper/typescriptHacks";
 
@@ -18,6 +19,7 @@ export const settingsToQueryParams = (setting: ChatSetting): string => {
 
 export const queryParamsToSettings = (paramString: string): ChatSetting => {
     const params: Array<string> = paramString
+        .replaceAll(`#${Routes.display}`, '')
         .replaceAll('?', '')
         .split('&');
 

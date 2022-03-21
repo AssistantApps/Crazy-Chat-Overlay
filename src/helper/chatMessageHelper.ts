@@ -1,7 +1,7 @@
 import { ChatMessage } from "../contract/chatMessage";
 
 export const chatMessageFromTags = (tags: any, message: any) => {
-    // console.log({ ...tags });
+    console.log(message, tags.emotes);
     const newMessage: ChatMessage = {
         id: tags.id,
         userId: tags['user-id'],

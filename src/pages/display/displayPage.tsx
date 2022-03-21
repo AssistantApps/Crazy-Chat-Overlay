@@ -8,13 +8,13 @@ import { queryParamsToSettings } from '../../mapper/chatSettingHelper';
 
 const tmi = require('tmi.js');
 
-const maxNumMessages = 10;
+const maxNumMessages = 25;
 
 export const DisplayPage: React.FC = () => {
     const [state, setState] = useState<NetworkState>(NetworkState.Loading);
     const [messages, setMessages] = useState<Array<ChatMessage>>([]);
     const [settings] = useState<ChatSetting>(
-        queryParamsToSettings(window.location.search)
+        queryParamsToSettings(window.location.hash)
     );
 
     useEffect(() => {

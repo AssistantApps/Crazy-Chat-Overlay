@@ -1,5 +1,6 @@
 import React from 'react';
 import { IChatMessageTilePresenterProps } from './chatMessageProps';
+import { MessageWithEmojis } from './messageWithEmojis';
 
 
 export const ChatMessageTile: React.FC<IChatMessageTilePresenterProps> = (props: IChatMessageTilePresenterProps) => {
@@ -7,7 +8,12 @@ export const ChatMessageTile: React.FC<IChatMessageTilePresenterProps> = (props:
         <div key={props.msg.id} className="message-wrapper">
             <p className="message default-tile">
                 <strong style={{ color: props.msg.colour }}>{props.msg.username}</strong>
-                <span>: {props.msg.message}</span>
+                <span>:&nbsp;
+                    <MessageWithEmojis
+                        msg={props.msg.message}
+                        emotes={props.msg.emotes}
+                    />
+                </span>
             </p>
         </div>
     );
