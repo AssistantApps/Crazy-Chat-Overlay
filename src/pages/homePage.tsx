@@ -1,4 +1,5 @@
 import React from 'react';
+import packageJson from '../../package.json';
 
 export const HomePage: React.FC = () => {
     return (
@@ -169,7 +170,7 @@ export const HomePage: React.FC = () => {
                         <li><a href="/" className="icon brands alt fa-linkedin-in"><span className="label">LinkedIn</span></a></li>
                     </ul>
                     <ul className="copyright">
-                        <li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+                        <li>&copy; AssistantApps</li><li> {packageJson?.version ?? '1.0.0'}</li>
                     </ul>
                 </div>
             </footer>
