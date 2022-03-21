@@ -28,7 +28,7 @@ export const Navbar: React.FC = () => {
                 <div className="inner">
                     <ul className="links">
                         <li onClick={onMenuClick}><Link href={siteUrl}>Home</Link></li>
-                        <li onClick={onMenuClick}><Link href={Routes.setting}>Settings</Link></li>
+                        <li onClick={onMenuClick}><Link href={'#' + Routes.setting}>Settings</Link></li>
                     </ul>
                     <hr />
                     <br />

@@ -36,8 +36,8 @@ export const App: React.FC = () => {
       <DarkMode>
         <AppShell>
           <Router hook={useHashLocation}>
-            <Route path={Routes.setting} component={SettingPage} />
-            <Route path={Routes.display} component={DisplayPage} />
+            <Route path={`${Routes.setting}:id*`} component={SettingPage} />
+            <Route path={`${Routes.display}:id*`} component={DisplayPage} />
             <Route component={HomePage} />
           </Router>
         </AppShell>
