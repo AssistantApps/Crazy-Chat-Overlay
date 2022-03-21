@@ -1,4 +1,4 @@
-import { Router, Route } from "wouter";
+import { Switch, Route } from "wouter";
 import { ChakraProvider, DarkMode } from '@chakra-ui/react';
 
 import { Routes } from "./constant/routes";
@@ -13,11 +13,11 @@ export const App: React.FC = () => {
     <ChakraProvider theme={theme}>
       <DarkMode>
         <AppShell>
-          <Router>
-            <Route path={Routes.home} component={HomePage} />
+          <Switch>
             <Route path={Routes.setting} component={SettingPage} />
             <Route path={Routes.display} component={DisplayPage} />
-          </Router>
+            <Route component={HomePage} />
+          </Switch>
         </AppShell>
       </DarkMode>
     </ChakraProvider>
