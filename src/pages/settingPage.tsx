@@ -67,7 +67,7 @@ export const SettingPage: React.FC = () => {
         const msgMessage = jabber.createParagraph(Math.floor(Math.random() * 20) + 3);
         const newMessage: ChatMessage = {
             id: msgMessage,
-            userId: 'MidnightStarXYZ',
+            userId: 'khaoztopsy',
             username: jabber.createWord(Math.floor(Math.random() * 10) + 3),
             colour: colours[Math.floor(Math.random() * colours.length)],
             message: msgMessage,

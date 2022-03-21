@@ -69,7 +69,7 @@ export const SettingsPanel: React.FC<IProps> = (props: IProps) => {
                     <Textarea
                         variant='filled'
                         rows={3}
-                        defaultValue={Routes.home + Routes.display + settingsToQueryParams(props.settings)}
+                        defaultValue={siteUrl + '#' + Routes.display + settingsToQueryParams(props.settings)}
                     />
                     <InputRightElement className="pointer" children={
                         <CopyIcon color='green.500'

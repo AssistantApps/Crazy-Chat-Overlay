@@ -6,10 +6,8 @@ import { DisplayPage } from "./pages/display/displayPage";
 import { HomePage } from "./pages/homePage";
 import { SettingPage } from "./pages/settingPage";
 
-const currentLocation = () => {
-  console.log('currentLocation ', window.location.hash.replace(/^#/, "") || "/");
-  return window.location.hash.replace(/^#/, "") || "/";
-};
+const currentLocation = () =>
+  window.location.hash.replace(/^#/, "") || "/";
 
 const navigate = (to: any) => (window.location.hash = to);
 
@@ -18,11 +16,7 @@ const useHashLocation: any = () => {
 
   useEffect(() => {
     // this function is called whenever the hash changes
-    const handler = () => {
-      console.log('hi');
-      console.log(currentLocation());
-      setLoc(currentLocation())
-    };
+    const handler = () => setLoc(currentLocation());
 
     // subscribe to hash changes
     window.addEventListener("hashchange", handler);
