@@ -6,6 +6,7 @@ import { ChatSetting } from '../contract/chatSettings';
 import { getValue } from '../helper/eventHelper';
 import { settingsToQueryParams } from '../mapper/chatSettingHelper';
 import { siteUrl } from '../constant/site';
+import { Routes } from '../constant/routes';
 
 interface IProps {
     settings: ChatSetting;
@@ -68,7 +69,7 @@ export const SettingsPanel: React.FC<IProps> = (props: IProps) => {
                     <Textarea
                         variant='filled'
                         rows={3}
-                        defaultValue={siteUrl + '#Display' + settingsToQueryParams(props.settings)}
+                        defaultValue={Routes.home + Routes.display + settingsToQueryParams(props.settings)}
                     />
                     <InputRightElement className="pointer" children={
                         <CopyIcon color='green.500'

@@ -10,6 +10,10 @@ export const Navbar: React.FC = () => {
 
     const onMenuClick = (e: any) => {
         e?.preventDefault?.();
+
+        const event = new Event('hashchange');
+        window.dispatchEvent(event);
+
         setIsOpen(isOpen => !isOpen);
     }
 
@@ -27,8 +31,8 @@ export const Navbar: React.FC = () => {
             <nav id="menu">
                 <div className="inner">
                     <ul className="links">
-                        <li onClick={onMenuClick}><Link href={siteUrl}>Home</Link></li>
-                        <li onClick={onMenuClick}><Link href={Routes.base + Routes.setting}>Settings</Link></li>
+                        <li onClick={onMenuClick}><Link href={Routes.home}>Home</Link></li>
+                        <li onClick={onMenuClick}><Link href={Routes.home + Routes.setting}>Settings</Link></li>
                     </ul>
                     <hr />
                     <br />

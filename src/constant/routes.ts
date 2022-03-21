@@ -1,6 +1,5 @@
 export const Routes = {
-    base: '/Crazy-Chat-Overlay',
-    home: '#',
+    home: '/Crazy-Chat-Overlay/#',
     display: '/display',
     setting: '/setting',
 }
