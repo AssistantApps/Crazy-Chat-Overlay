@@ -1,1 +1,1 @@
-export const siteUrl = 'https://assistantapps.com';
+export const siteUrl = 'https://assistantapps.github.io/Crazy-Chat-Overlay/';

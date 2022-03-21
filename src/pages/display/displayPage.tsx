@@ -25,7 +25,7 @@ export const DisplayPage: React.FC = () => {
                 reconnect: true,
                 secure: true
             },
-            channels: [settings.twitchChannel]
+            channels: [settings.twitchChannel ?? 'khaoztopsy']
         });
 
         client.connect().then(() => {

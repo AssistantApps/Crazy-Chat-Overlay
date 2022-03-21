@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link } from "wouter";
 import { Externals } from "../../constant/external";
 import { Routes } from "../../constant/routes";
+import { siteUrl } from "../../constant/site";
 
 export const Navbar: React.FC = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -15,7 +16,7 @@ export const Navbar: React.FC = () => {
     return (
         <div className={classNames({ 'is-menu-visible': isOpen })}>
             <header id="header">
-                <a href="/" className="logo">
+                <a href={siteUrl} className="logo">
                     <strong>Crazy Chat Overlay</strong>&nbsp;<span>by AssistantApps</span>
                 </a>
                 <img src="https://assistantapps.com/assets/favicon/apple-icon-60x60.png" alt="AssistantApps logo" />
@@ -26,14 +27,14 @@ export const Navbar: React.FC = () => {
             <nav id="menu">
                 <div className="inner">
                     <ul className="links">
-                        <li onClick={onMenuClick}><Link href={Routes.home}>Home</Link></li>
+                        <li onClick={onMenuClick}><Link href={siteUrl}>Home</Link></li>
                         <li onClick={onMenuClick}><Link href={Routes.setting}>Settings</Link></li>
                     </ul>
                     <hr />
                     <br />
                     <ul className="actions stacked">
                         <li><a href={Externals.AssistantApps} className="button primary fit">AssistantApps</a></li>
-                        <li><a href={Externals.githubSource} className="button fit">View on Github</a></li>
+                        <li><a href={Externals.GithubSource} className="button fit">View on Github</a></li>
                         <li><a href={Externals.KurtLourens} className="button fit">Kurt Lourens</a></li>
                     </ul>
                 </div>
