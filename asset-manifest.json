@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Crazy-Chat-Overlay/static/css/main.cb1b0d07.css",
-    "main.js": "/Crazy-Chat-Overlay/static/js/main.a926e56c.js",
+    "main.js": "/Crazy-Chat-Overlay/static/js/main.9820ec51.js",
     "index.html": "/Crazy-Chat-Overlay/index.html",
     "main.cb1b0d07.css.map": "/Crazy-Chat-Overlay/static/css/main.cb1b0d07.css.map",
-    "main.a926e56c.js.map": "/Crazy-Chat-Overlay/static/js/main.a926e56c.js.map"
+    "main.9820ec51.js.map": "/Crazy-Chat-Overlay/static/js/main.9820ec51.js.map"
   },
   "entrypoints": [
     "static/css/main.cb1b0d07.css",
-    "static/js/main.a926e56c.js"
+    "static/js/main.9820ec51.js"
   ]
 }
