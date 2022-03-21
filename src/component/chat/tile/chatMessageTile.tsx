@@ -10,6 +10,7 @@ export const ChatMessageTile: React.FC<IChatMessageTilePresenterProps> = (props:
                 <strong style={{ color: props.msg.colour }}>{props.msg.username}</strong>
                 <span>:&nbsp;
                     <MessageWithEmojis
+                        key={props.msg.message}
                         msg={props.msg.message}
                         emotes={props.msg.emotes}
                     />

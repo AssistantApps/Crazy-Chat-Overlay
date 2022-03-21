@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+const runes = require('runes');
 
 interface IProps {
     msg: string;
@@ -43,6 +44,8 @@ export const MessageWithEmojis: React.FC<IProps> = (props: IProps) => {
         return (a.indexes.start > b.indexes.start) ? 1 : -1;
     });
 
+    console.log(emoteArr)
+
     let currentPosition = 0;
     const mesgArray: Array<ReactNode> = [];
     for (const emObj of emoteArr) {
@@ -50,10 +53,13 @@ export const MessageWithEmojis: React.FC<IProps> = (props: IProps) => {
         let endIndx = emObj.indexes.end;
         const baseKey = mesgArray.length.toString() + startIndx.toString() + startIndx.toString();
 
-        if (emObj.indexes.start != 0) {
+        const emojiAtTheStart = emObj.indexes.start === 0;
+        const noTextBetweenEmojis = (startIndx - (currentPosition - 1)) < 2;
+
+        if (!emojiAtTheStart && !noTextBetweenEmojis) {
             mesgArray.push(
                 <span key={baseKey + 'message'}>
-                    {props.msg.substring(currentPosition, startIndx)}
+                    {runes(props.msg).slice(currentPosition, startIndx)}
                 </span>
             );
         }
@@ -63,7 +69,7 @@ export const MessageWithEmojis: React.FC<IProps> = (props: IProps) => {
                 key={baseKey + 'image'}
                 style={{ display: 'inline' }}
                 src={emObj.imgUrl}
-                alt={props.msg.substring(startIndx, endIndx)}
+                alt={runes(props.msg).slice(startIndx, endIndx)}
             />
         );
         currentPosition = emObj.indexes.end + 1;
@@ -73,7 +79,7 @@ export const MessageWithEmojis: React.FC<IProps> = (props: IProps) => {
         const baseKey = mesgArray.length.toString() + 'final message';
         mesgArray.push(
             <span key={baseKey}>
-                {props.msg.substring(currentPosition)}
+                {runes.substr(props.msg, currentPosition)}
             </span>
         );
     }
