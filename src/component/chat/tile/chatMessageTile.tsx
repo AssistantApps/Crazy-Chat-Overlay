@@ -10,6 +10,7 @@ export const ChatMessageTile: React.FC<IChatMessageTilePresenterProps> = (props:
             <p className="message default-tile">
                 <UsernameWithBadges
                     {...props.msg}
+                    badgeLookup={props.badgeLookup}
                 />
                 <span>:&nbsp;</span>
                 <MessageWithEmojis

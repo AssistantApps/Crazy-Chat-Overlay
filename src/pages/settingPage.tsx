@@ -5,6 +5,7 @@ import { SettingsPanel } from '../component/settingsPanel';
 import { MessageTileType } from '../constant/messageTileType';
 import { ChatMessage } from '../contract/chatMessage';
 import { ChatSetting } from '../contract/chatSettings';
+import { anyObject } from '../helper/typescriptHacks';
 
 const Jabber = require('jabber');
 
@@ -91,6 +92,7 @@ export const SettingPage: React.FC = () => {
             </Box>
             <Box flexGrow={1} style={{ height: '100%', maxWidth: '400px' }}>
                 <ChatListView
+                    badgeLookup={anyObject}
                     messageList={messages}
                     messageTileType={settings.messageTileType}
                 />

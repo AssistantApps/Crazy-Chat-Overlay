@@ -4,14 +4,25 @@ import { NetworkState } from '../../constant/networkState';
 import { ChatMessage } from '../../contract/chatMessage';
 import { ChatSetting } from '../../contract/chatSettings';
 import { chatMessageFromTags } from '../../helper/chatMessageHelper';
+import { IDependencyInjection, withServices } from '../../integration/dependencyInjection';
 import { queryParamsToSettings } from '../../mapper/chatSettingHelper';
+import { TwitchDataService } from '../../services/twitchLookupService';
 
 const tmi = require('tmi.js');
 
 const maxNumMessages = 25;
 
-export const DisplayPage: React.FC = () => {
+interface IWithDepInj {
+    twitchDataService: TwitchDataService;
+}
+interface IWithoutDepInj {
+}
+interface IProps extends IWithDepInj, IWithoutDepInj { }
+
+export const DisplayPageUnconnected: React.FC<IProps> = (props: IProps) => {
     const [state, setState] = useState<NetworkState>(NetworkState.Loading);
+    const [lookupState, setLookupState] = useState<NetworkState>(NetworkState.Loading);
+    const [badgeLookup, setBadgeLookup] = useState<any>();
     const [messages, setMessages] = useState<Array<ChatMessage>>([]);
     const [settings] = useState<ChatSetting>(
         queryParamsToSettings(window.location.hash)
@@ -19,13 +30,15 @@ export const DisplayPage: React.FC = () => {
 
     useEffect(() => {
         document.getElementById('header')?.remove?.();
+        const channelName = settings.twitchChannel ?? 'khaoztopsy';
+        loadLookups(channelName);
         const client = new tmi.Client({
             options: { debug: true, messagesLogLevel: "info" },
             connection: {
                 reconnect: true,
                 secure: true
             },
-            channels: [settings.twitchChannel ?? 'khaoztopsy']
+            channels: [channelName]
         });
 
         client.connect().then(() => {
@@ -36,7 +49,7 @@ export const DisplayPage: React.FC = () => {
         });
 
         client.on('message', (channel: any, tags: any, message: any, self: any) => {
-            const newMessage = chatMessageFromTags(tags, message);
+            const newMessage = chatMessageFromTags(channel, tags, message, self);
             addToMessageArray(newMessage);
         });
 
@@ -45,6 +58,14 @@ export const DisplayPage: React.FC = () => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const loadLookups = async (channelName: string) => {
+        const lookups = await props.twitchDataService.load(channelName);
+        console.log(lookups);
+
+        setBadgeLookup(lookups.badgeLookup);
+        setLookupState(NetworkState.Success);
+    }
 
     const addToMessageArray = (newMessage: ChatMessage) => {
         setMessages(msgs => {
@@ -56,16 +77,25 @@ export const DisplayPage: React.FC = () => {
         });
     }
 
+    if (state === NetworkState.Loading || lookupState === NetworkState.Loading) {
+        return (<p>Connecting...</p>);
+    }
+
     return (
         <div className="message-list">
-            {
-                (state === NetworkState.Loading) &&
-                <p>Connecting...</p>
-            }
             <ChatListView
                 messageList={messages}
+                badgeLookup={badgeLookup}
                 messageTileType={settings.messageTileType}
             />
         </div>
     );
 }
+
+
+export const DisplayPage = withServices<IWithoutDepInj, IWithDepInj>(
+    DisplayPageUnconnected,
+    (services: IDependencyInjection) => ({
+        twitchDataService: services.twitchDataService,
+    })
+);

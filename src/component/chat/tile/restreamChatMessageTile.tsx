@@ -22,6 +22,7 @@ export const RestreamChatMessageTile: React.FC<IChatMessageTilePresenterProps> =
                         <div className="name">
                             <UsernameWithBadges
                                 {...props.msg}
+                                badgeLookup={props.badgeLookup}
                             />
                         </div>
                         <div className="time">{formatDate(props.msg.date, 'HH:mm')}</div>

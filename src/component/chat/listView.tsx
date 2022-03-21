@@ -5,6 +5,7 @@ import { chatMessageTileFactory } from './chatMessageTileFactory';
 import { IChatMessageTilePresenterProps } from './tile/chatMessageProps';
 
 interface IProps {
+    badgeLookup: any;
     messageList: Array<ChatMessage>;
     messageTileType: MessageTileType;
 }
@@ -24,6 +25,7 @@ export const ChatListView: React.FC<IProps> = (props: IProps) => {
             {
                 props.messageList.map((chatM, i) => (
                     <ChatMessageTilePresenter
+                        badgeLookup={props.badgeLookup}
                         key={chatM.id}
                         msg={chatM}
                     />

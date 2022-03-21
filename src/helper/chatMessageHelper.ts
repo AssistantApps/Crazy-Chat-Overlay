@@ -1,6 +1,6 @@
 import { ChatMessage } from "../contract/chatMessage";
 
-export const chatMessageFromTags = (tags: any, message: any) => {
+export const chatMessageFromTags = (channel: string, tags: any, message: any, self: any) => {
     console.log(message, tags);
     const newMessage: ChatMessage = {
         id: tags.id,

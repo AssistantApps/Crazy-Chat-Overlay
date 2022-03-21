@@ -10,6 +10,7 @@ export const MinimalistChatMessageTile: React.FC<IChatMessageTilePresenterProps>
             <p className="message">
                 <UsernameWithBadges
                     {...props.msg}
+                    badgeLookup={props.badgeLookup}
                 />
                 <span>:&nbsp;</span>
                 <MessageWithEmojis
