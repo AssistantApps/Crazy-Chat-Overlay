@@ -61,7 +61,6 @@ export const DisplayPageUnconnected: React.FC<IProps> = (props: IProps) => {
 
     const loadLookups = async (channelName: string) => {
         const lookups = await props.twitchDataService.load(channelName);
-        console.log(lookups);
 
         setBadgeLookup(lookups.badgeLookup);
         setLookupState(NetworkState.Success);

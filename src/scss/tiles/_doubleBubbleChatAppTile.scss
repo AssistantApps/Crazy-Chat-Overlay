@@ -1,0 +1,35 @@
+.double-bubble {
+    margin: 0.5em;
+    padding: 0.35em 0.5em;
+
+    .user,
+    .message {
+        position: relative;
+        border-radius: 5px;
+        padding: 0 0.45em 0.2em 0.45em;
+    }
+
+    .user {
+        background: #F3D05A;
+        display: inline-block;
+        color: black !important;
+        z-index: 2;
+
+        strong {
+            color: black !important;
+        }
+    }
+
+    .message-wrapper {
+        .message {
+            display: inline-block;
+            background: white;
+            color: rgb(25, 25, 25);
+            margin-top: -0.2em;
+            margin-left: 1.5em;
+            margin-right: auto;
+            padding: 0.25em 0.45em;
+            z-index: -1;
+        }
+    }
+}
