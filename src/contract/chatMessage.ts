@@ -5,6 +5,8 @@ export interface ChatMessage {
     colour?: string;
     message: string;
     emotes: Array<string>;
+    badgeInfo?: any;
+    badges?: any;
     mod: boolean;
     subscriber: boolean;
     date: Date;

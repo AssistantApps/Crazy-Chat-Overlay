@@ -1,6 +1,8 @@
 import React from 'react';
 import { formatDate } from '../../../helper/dateHelper';
 import { LazyLoadImage } from '../../lazyLoadImage/lazyLoadImage';
+import { MessageWithEmojis } from '../base/messageWithEmojis';
+import { UsernameWithBadges } from '../base/usernameWithBadges';
 import { IChatMessageTilePresenterProps } from './chatMessageProps';
 
 
@@ -18,14 +20,17 @@ export const RestreamChatMessageTile: React.FC<IChatMessageTilePresenterProps> =
                 <div className="content">
                     <div className="msg-info">
                         <div className="name">
-                            <span style={{ color: props.msg.colour }}>{props.msg.username}</span>
+                            <UsernameWithBadges
+                                {...props.msg}
+                            />
                         </div>
                         <div className="time">{formatDate(props.msg.date, 'HH:mm')}</div>
                     </div>
-
-                    <p key={props.msg.id} className="">
-                        {props.msg.message}
-                    </p>
+                    <MessageWithEmojis
+                        key={props.msg.message}
+                        msg={props.msg.message}
+                        emotes={props.msg.emotes}
+                    />
                 </div>
             </div>
         </div>

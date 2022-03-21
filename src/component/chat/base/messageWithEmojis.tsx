@@ -44,8 +44,6 @@ export const MessageWithEmojis: React.FC<IProps> = (props: IProps) => {
         return (a.indexes.start > b.indexes.start) ? 1 : -1;
     });
 
-    console.log(emoteArr)
-
     let currentPosition = 0;
     const mesgArray: Array<ReactNode> = [];
     for (const emObj of emoteArr) {
@@ -67,7 +65,6 @@ export const MessageWithEmojis: React.FC<IProps> = (props: IProps) => {
         mesgArray.push(
             <img
                 key={baseKey + 'image'}
-                style={{ display: 'inline' }}
                 src={emObj.imgUrl}
                 alt={runes(props.msg).slice(startIndx, endIndx)}
             />

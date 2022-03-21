@@ -1,4 +1,6 @@
 import React from 'react';
+import { MessageWithEmojis } from '../base/messageWithEmojis';
+import { UsernameWithBadges } from '../base/usernameWithBadges';
 import { IChatMessageTilePresenterProps } from './chatMessageProps';
 
 
@@ -6,8 +8,15 @@ export const MinimalistChatMessageTile: React.FC<IChatMessageTilePresenterProps>
     return (
         <div key={props.msg.id} className="message-wrapper">
             <p className="message">
-                <strong style={{ color: props.msg.colour }}>{props.msg.username}</strong>
-                <span>: {props.msg.message}</span>
+                <UsernameWithBadges
+                    {...props.msg}
+                />
+                <span>:&nbsp;</span>
+                <MessageWithEmojis
+                    key={props.msg.message}
+                    msg={props.msg.message}
+                    emotes={props.msg.emotes}
+                />
             </p>
         </div>
     );

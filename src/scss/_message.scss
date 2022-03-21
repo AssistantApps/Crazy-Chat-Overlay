@@ -1,6 +1,6 @@
-@import 'tiles/defaultTile';
-@import 'tiles/chatAppTile';
-@import 'tiles/restream';
+@import "tiles/defaultTile";
+@import "tiles/chatAppTile";
+@import "tiles/restream";
 
 .message-wrapper {
     position: relative;
@@ -10,6 +10,11 @@
 .message-list {
     max-height: 100%;
     overflow: hidden;
+
+    img {
+        display: inline-block;
+        margin: 0 0.1em;
+    }
 }
 
 @keyframes message-incomming {

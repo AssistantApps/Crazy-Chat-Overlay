@@ -1,20 +1,22 @@
 import React from 'react';
 import { IChatMessageTilePresenterProps } from './chatMessageProps';
-import { MessageWithEmojis } from './messageWithEmojis';
+import { MessageWithEmojis } from '../base/messageWithEmojis';
+import { UsernameWithBadges } from '../base/usernameWithBadges';
 
 
 export const ChatMessageTile: React.FC<IChatMessageTilePresenterProps> = (props: IChatMessageTilePresenterProps) => {
     return (
         <div key={props.msg.id} className="message-wrapper">
             <p className="message default-tile">
-                <strong style={{ color: props.msg.colour }}>{props.msg.username}</strong>
-                <span>:&nbsp;
-                    <MessageWithEmojis
-                        key={props.msg.message}
-                        msg={props.msg.message}
-                        emotes={props.msg.emotes}
-                    />
-                </span>
+                <UsernameWithBadges
+                    {...props.msg}
+                />
+                <span>:&nbsp;</span>
+                <MessageWithEmojis
+                    key={props.msg.message}
+                    msg={props.msg.message}
+                    emotes={props.msg.emotes}
+                />
             </p>
         </div>
     );
