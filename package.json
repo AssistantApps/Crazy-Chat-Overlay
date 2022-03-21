@@ -5,8 +5,9 @@
   "homepage": "https://assistantapps.github.io/Crazy-Chat-Overlay",
   "scripts": {
     "start": "react-scripts start",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "npm-run-all --sequential build gh:deploy",
+    "gh:pre": "npm run build",
+    "gh:deploy": "gh-pages -d build",
     "build": "npm-run-all --sequential build:*",
     "buildtodo": "npm-run-all --sequential build:* publish:*",
     "build:meta": "webpack --progress --profile --mode production",
