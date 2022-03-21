@@ -29,8 +29,11 @@ export const Navbar: React.FC = () => {
                         <li onClick={onMenuClick}><Link href={Routes.home}>Home</Link></li>
                         <li onClick={onMenuClick}><Link href={Routes.setting}>Settings</Link></li>
                     </ul>
+                    <hr />
+                    <br />
                     <ul className="actions stacked">
                         <li><a href={Externals.AssistantApps} className="button primary fit">AssistantApps</a></li>
+                        <li><a href={Externals.githubSource} className="button fit">View on Github</a></li>
                         <li><a href={Externals.KurtLourens} className="button fit">Kurt Lourens</a></li>
                     </ul>
                 </div>

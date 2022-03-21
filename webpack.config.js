@@ -6,7 +6,7 @@ const bundleFileName = 'bundle';
 const dirName = 'public';
 const distPath = path.resolve(__dirname, dirName);
 
-const jsDirName = 'assets/js';
+const jsDirName = 'public/assets/js';
 const jsDistPath = path.resolve(__dirname, jsDirName);
 
 const packageVersion = require('./package.json').version || '1.0.0';

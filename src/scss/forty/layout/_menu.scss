@@ -7,14 +7,14 @@
 /* Menu */
 
 #menu {
-    @include vendor('transition', ('transform #{_duration(menu)} ease',
-            'opacity #{_duration(menu)} ease',
-            'visibility #{_duration(menu)}'
-        ));
-    @include vendor('align-items', 'center');
-    @include vendor('display', 'flex');
-    @include vendor('justify-content', 'center');
-    @include vendor('pointer-events', 'none');
+    @include vendor(
+        "transition",
+        ("transform #{_duration(menu)} ease", "opacity #{_duration(menu)} ease", "visibility #{_duration(menu)}")
+    );
+    @include vendor("align-items", "center");
+    @include vendor("display", "flex");
+    @include vendor("justify-content", "center");
+    @include vendor("pointer-events", "none");
     background: _palette(bg);
     box-shadow: none;
     height: 100%;
@@ -29,11 +29,15 @@
     z-index: _misc(z-index-base) + 2;
 
     .inner {
-        @include vendor('transition', ('transform #{_duration(menu)} ease-out',
-                'opacity #{_duration(menu)} ease',
-                'visibility #{_duration(menu)}'
-            ));
-        @include vendor('transform', 'rotateX(20deg)');
+        @include vendor(
+            "transition",
+            (
+                "transform #{_duration(menu)} ease-out",
+                "opacity #{_duration(menu)} ease",
+                "visibility #{_duration(menu)}"
+            )
+        );
+        @include vendor("transform", "rotateX(20deg)");
         -webkit-overflow-scrolling: touch;
         max-width: 100%;
         max-height: 100vh;
@@ -41,7 +45,7 @@
         overflow: auto;
         text-align: center;
         visibility: hidden;
-        width: 18em;
+        width: 20em;
 
         > :first-child {
             margin-top: _size(element-margin);
@@ -53,16 +57,17 @@
     }
 
     ul {
-        margin: 0 0 (_size(element-margin) * 0.5) 0;
+        margin: 0;
+        // margin: 0 0 (_size(element-margin) * 0.5) 0;
 
         &.links {
             list-style: none;
             padding: 0;
 
-            >li {
+            > li {
                 padding: 0;
 
-                >a:not(.button) {
+                > a:not(.button) {
                     border: 0;
                     border-top: solid 1px _palette(border);
                     display: block;
@@ -74,13 +79,13 @@
                     text-transform: uppercase;
                 }
 
-                >.button {
+                > .button {
                     display: block;
                     margin: 0.5em 0 0 0;
                 }
 
                 &:first-child {
-                    >a:not(.button) {
+                    > a:not(.button) {
                         border-top: 0 !important;
                     }
                 }
@@ -89,7 +94,7 @@
     }
 
     .close {
-        @include vendor('transition', 'color #{_duration(transition)} ease-in-out');
+        @include vendor("transition", "color #{_duration(transition)} ease-in-out");
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         border: 0;
         cursor: pointer;
@@ -109,10 +114,10 @@
 
         &:before,
         &:after {
-            @include vendor('transition', 'opacity #{_duration(transition)} ease-in-out');
+            @include vendor("transition", "opacity #{_duration(transition)} ease-in-out");
             background-position: center;
             background-repeat: no-repeat;
-            content: '';
+            content: "";
             display: block;
             height: 4em;
             position: absolute;
@@ -122,11 +127,15 @@
         }
 
         &:before {
-            background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 20 20" zoomAndPan="disable"><style>line { stroke: #{_palette(fg-bold)}; stroke-width: 2; }</style><line x1="0" y1="0" x2="20" y2="20" /><line x1="20" y1="0" x2="0" y2="20" /></svg>');
+            background-image: svg-url(
+                '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 20 20" zoomAndPan="disable"><style>line { stroke: #{_palette(fg-bold)}; stroke-width: 2; }</style><line x1="0" y1="0" x2="20" y2="20" /><line x1="20" y1="0" x2="0" y2="20" /></svg>'
+            );
         }
 
         &:after {
-            background-image: svg-url('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 20 20" zoomAndPan="disable"><style>line { stroke: #{_palette(highlight)}; stroke-width: 2; }</style><line x1="0" y1="0" x2="20" y2="20" /><line x1="20" y1="0" x2="0" y2="20" /></svg>');
+            background-image: svg-url(
+                '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px" viewBox="0 0 20 20" zoomAndPan="disable"><style>line { stroke: #{_palette(highlight)}; stroke-width: 2; }</style><line x1="0" y1="0" x2="20" y2="20" /><line x1="20" y1="0" x2="0" y2="20" /></svg>'
+            );
             opacity: 0;
         }
 
@@ -147,16 +156,16 @@ body.is-ie {
 
 .is-menu-visible {
     #wrapper {
-        @include vendor('filter', 'blur(0.5em)');
+        @include vendor("filter", "blur(0.5em)");
     }
 
     #menu {
-        @include vendor('pointer-events', 'auto');
+        @include vendor("pointer-events", "auto");
         opacity: 1;
         visibility: visible;
 
         .inner {
-            @include vendor('transform', 'none');
+            @include vendor("transform", "none");
             opacity: 1;
             visibility: visible;
         }

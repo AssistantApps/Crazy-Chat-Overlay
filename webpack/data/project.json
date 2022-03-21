@@ -40,16 +40,18 @@
             "x192": "assets/favicon/android-icon-192x192.png"
         },
         "apple": {
-            "x76": "assets/images/pwa/KurtAvatar76.png",
-            "x120": "assets/images/pwa/KurtAvatar120.png",
-            "x128": "assets/images/pwa/KurtAvatar128.png",
-            "x152": "assets/images/pwa/KurtAvatar152.png",
-            "x192": "assets/images/pwa/KurtAvatar192.png",
-            "x256": "assets/images/pwa/KurtAvatar256.png",
-            "x512": "assets/images/pwa/KurtAvatar512.png"
+            "x57": "assets/favicon/apple-icon-57x57.png",
+            "x60": "assets/favicon/apple-icon-60x60.png",
+            "x72": "assets/favicon/apple-icon-72x72.png",
+            "x76": "assets/favicon/apple-icon-76x76.png",
+            "x114": "assets/favicon/apple-icon-114x114.png",
+            "x120": "assets/favicon/apple-icon-120x120.png",
+            "x144": "assets/favicon/apple-icon-144x144.png",
+            "x152": "assets/favicon/apple-icon-152x152.png",
+            "x180": "assets/favicon/apple-icon-180x180.png"
         },
-        "twitter": "https://www.mugshotbot.com/m?mode=dark&color=red&pattern=bubbles&url=https://khaoz-topsy.github.io/CaptSteveWebsite",
-        "facebook": "https://www.mugshotbot.com/m?mode=dark&color=red&pattern=bubbles&url=https://khaoz-topsy.github.io/CaptSteveWebsite"
+        "twitter": "https://www.mugshotbot.com/m?mode=dark&color=purple&pattern=bubbles&url=https://assistantapps.github.io/Crazy-Chat-Overlay",
+        "facebook": "https://www.mugshotbot.com/m?mode=dark&color=purple&pattern=bubbles&url=https://assistantapps.github.io/Crazy-Chat-Overlay"
     },
     "redirects": [
         {
