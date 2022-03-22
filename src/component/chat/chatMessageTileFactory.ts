@@ -6,6 +6,7 @@ import { ChatMessageTile } from "./tile/chatMessageTile";
 import { DoubleBubbleChatMessageTile } from "./tile/doubleBubbleChatMessageTile";
 import { MinimalistChatMessageTile } from "./tile/minimalistChatMessageTile";
 import { RestreamChatMessageTile } from "./tile/restreamChatMessageTile";
+import { TldrChatMessageTile } from "./tile/tldrChatMessageTile";
 
 export const chatMessageTileFactory = (messageTileType: MessageTileType): React.FC<IChatMessageTilePresenterProps> => {
     switch (messageTileType) {
@@ -13,6 +14,7 @@ export const chatMessageTileFactory = (messageTileType: MessageTileType): React.
         case MessageTileType.DoubleBubble: return (DoubleBubbleChatMessageTile);
         case MessageTileType.Restream: return (RestreamChatMessageTile);
         case MessageTileType.Minimalist: return (MinimalistChatMessageTile);
+        case MessageTileType.Tldr: return (TldrChatMessageTile);
         default:
             return (ChatMessageTile);
     }

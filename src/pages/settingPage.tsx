@@ -17,6 +17,7 @@ export const SettingPage: React.FC = () => {
     const [settings, setSettings] = useState<ChatSetting>({
         twitchChannel: 'khaoztopsy',
         messageTileType: MessageTileType.Default,
+        additional: anyObject,
     });
 
     const colours = [

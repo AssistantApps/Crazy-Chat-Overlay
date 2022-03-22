@@ -7,11 +7,42 @@ import { getValue } from '../helper/eventHelper';
 import { settingsToQueryParams } from '../mapper/chatSettingHelper';
 import { siteUrl } from '../constant/site';
 import { Routes } from '../constant/routes';
+import { copyToClipboard } from '../helper/documentHelper';
 
 interface IProps {
     settings: ChatSetting;
     setSettings: (newSettings: ChatSetting) => void;
 }
+
+const chatThemeOptions = [
+    {
+        type: MessageTileType.Default,
+        isPremium: false,
+    },
+    {
+        type: MessageTileType.Minimalist,
+        isPremium: false,
+    },
+    {
+        type: MessageTileType.ChatApp,
+        name: 'Chat app',
+        isPremium: false,
+    },
+    {
+        type: MessageTileType.DoubleBubble,
+        name: 'Double Bubble',
+        isPremium: false,
+    },
+    {
+        type: MessageTileType.Restream,
+        isPremium: true,
+    },
+    {
+        type: MessageTileType.Tldr,
+        name: 'TLDR',
+        isPremium: false,
+    }
+];
 
 export const SettingsPanel: React.FC<IProps> = (props: IProps) => {
     const toast = useToast()
@@ -29,6 +60,19 @@ export const SettingsPanel: React.FC<IProps> = (props: IProps) => {
         if (isNaN(newValue as any)) return;
 
         props.setSettings({ ...props.settings, messageTileType: Number(newValue) });
+    }
+
+    const displayUrl = siteUrl + '#' + Routes.display + settingsToQueryParams(props.settings);
+    const onClickCopy = () => {
+        const copied = copyToClipboard(displayUrl);
+        if (copied) {
+            toast({
+                title: 'Copied!',
+                status: 'success',
+                duration: 3000,
+                isClosable: true,
+            });
+        }
     }
 
     return (
@@ -50,16 +94,14 @@ export const SettingsPanel: React.FC<IProps> = (props: IProps) => {
                     onChange={messageTileOnChange}
                 >
                     {
-                        Object.keys(MessageTileType)
-                            .filter((item) => isNaN(Number(item)))
-                            .map((value, index) => (
-                                <option
-                                    key={index}
-                                    value={index}
-                                >
-                                    {value}
-                                </option>
-                            ))
+                        chatThemeOptions.map((theme, index) => (
+                            <option
+                                key={index}
+                                value={index}
+                            >
+                                {theme.name ?? MessageTileType[theme.type].toString()}
+                            </option>
+                        ))
                     }
                 </Select>
             </Box>
@@ -69,20 +111,12 @@ export const SettingsPanel: React.FC<IProps> = (props: IProps) => {
                     <Textarea
                         variant='filled'
                         rows={3}
-                        defaultValue={siteUrl + '#' + Routes.display + settingsToQueryParams(props.settings)}
+                        defaultValue={displayUrl}
                     />
-                    <InputRightElement className="pointer" children={
-                        <CopyIcon color='green.500'
-                            onClick={() =>
-                                toast({
-                                    title: 'Copied!',
-                                    status: 'success',
-                                    duration: 3000,
-                                    isClosable: true,
-                                })
-                            }
-                        />
-                    } />
+                    <InputRightElement
+                        className="pointer"
+                        children={<CopyIcon color='green.500' onClick={onClickCopy} />}
+                    />
                 </InputGroup>
             </Box>
         </Box>

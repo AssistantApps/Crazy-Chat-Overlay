@@ -4,4 +4,5 @@ export enum MessageTileType {
     ChatApp,
     DoubleBubble,
     Restream,
+    Tldr,
 }

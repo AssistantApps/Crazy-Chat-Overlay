@@ -22,7 +22,7 @@ export const MessageWithEmojis: React.FC<IProps> = (props: IProps) => {
     for (const [key, valueArr] of Object.entries(props.emotes ?? {})) {
         for (const value of (valueArr as any)) {
             const indexStrArr = ((value as any) ?? '').split('-');
-            if (indexStrArr.length != 2) continue;
+            if (indexStrArr.length !== 2) continue;
 
             const indxObj: IEmoteIndex = {
                 start: parseInt(indexStrArr[0]),
