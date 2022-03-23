@@ -32,6 +32,11 @@ export const SettingPage: React.FC = () => {
         'orange',
     ];
 
+    const profilePics = [
+        '104488162',
+        '220566857',
+    ];
+
     useEffect(() => {
         Array(3).fill(0).map((_, indx) => setTimeout(addMessage, indx * 10));
         const intervalId = setInterval(addMessage, 2500);
@@ -69,7 +74,7 @@ export const SettingPage: React.FC = () => {
         const msgMessage = jabber.createParagraph(Math.floor(Math.random() * 20) + 3);
         const newMessage: ChatMessage = {
             id: msgMessage,
-            userId: '104488162',
+            userId: profilePics[Math.floor(Math.random() * profilePics.length)],
             username: jabber.createWord(Math.floor(Math.random() * 10) + 3),
             colour: colours[Math.floor(Math.random() * colours.length)],
             message: msgMessage,
@@ -93,6 +98,7 @@ export const SettingPage: React.FC = () => {
             </Box>
             <Box flexGrow={1} style={{ height: '100%', maxWidth: '400px' }}>
                 <ChatListView
+                    betterEmotes={anyObject}
                     badgeLookup={anyObject}
                     messageList={messages}
                     messageTileType={settings.messageTileType}

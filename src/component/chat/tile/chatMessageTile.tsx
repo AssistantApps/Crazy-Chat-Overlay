@@ -17,6 +17,7 @@ export const ChatMessageTile: React.FC<IChatMessageTilePresenterProps> = (props:
                     key={props.msg.message}
                     msg={props.msg.message}
                     emotes={props.msg.emotes}
+                    betterEmotes={props.betterEmotes}
                 />
             </p>
         </div>

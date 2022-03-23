@@ -1,9 +1,11 @@
 import React, { ReactNode } from 'react';
+import { IEmoteLookup } from '../../../contract/emoteLookup';
 const runes = require('runes');
 
 interface IProps {
     msg: string;
     emotes: any;
+    betterEmotes: Array<IEmoteLookup>;
 }
 
 interface IEmoteIndex {
@@ -14,7 +16,6 @@ interface IEmoteIndex {
 interface IEmoteArr {
     indexes: IEmoteIndex,
     imgUrl: string;
-    icon: string;
 }
 
 export const MessageWithEmojis: React.FC<IProps> = (props: IProps) => {
@@ -31,10 +32,33 @@ export const MessageWithEmojis: React.FC<IProps> = (props: IProps) => {
             emoteArr.push({
                 indexes: indxObj,
                 imgUrl: `https://static-cdn.jtvnw.net/emoticons/v2/${key}/default/dark/1.0`,
-                icon: key,
             });
         }
     }
+
+    // for (const betterEmote of props.betterEmotes) {
+    //     const indexes = [];
+    //     let currentStartIndex = 0;
+    //     const textLength = betterEmote.text.length;
+    //     while (currentStartIndex < props.msg.length - 2) {
+    //         const textSelection = props.msg.substring(currentStartIndex);
+    //         const textIndex = textSelection.indexOf(betterEmote.text);
+    //         if (textIndex >= 0) {
+    //             indexes.push(textIndex);
+    //             currentStartIndex = currentStartIndex + textLength;
+    //         }
+    //     }
+
+    //     for (const startIndex of indexes) {
+    //         emoteArr.push({
+    //             indexes: {
+    //                 start: startIndex,
+    //                 end: startIndex + textLength
+    //             },
+    //             imgUrl: betterEmote.url,
+    //         });
+    //     }
+    // }
 
     if (emoteArr.length < 1) {
         return (<>{props.msg}</>);

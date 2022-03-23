@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Router } from "wouter";
 
 import { Routes } from "./constant/routes";
-import { DisplayPage } from "./pages/display/displayPage";
+import { DisplayPage } from "./pages/displayPage";
 import { HomePage } from "./pages/homePage";
 import { SettingPage } from "./pages/settingPage";
 

@@ -29,7 +29,7 @@ export class LazyLoadImage extends React.Component<ILazyLoadImageProps, IState> 
         const imageSource = (src && src.length > 5) ? src : notFoundImageSrc;
         return (
             <ReactLazy.LazyLoadImage
-                placeholderSrc={'/assets/images/loader.svg'}
+                placeholderSrc={'/assets/img/loader.svg'}
                 src={this.state.imageNotFound ? notFoundImageSource : imageSource}
                 title={this.props.title ? this.props.title : this.props.alt}
                 height={this.props.height}

@@ -17,6 +17,7 @@ export const TldrChatMessageTile: React.FC<IChatMessageTilePresenterProps> = (pr
                     key={props.msg.message}
                     msg={props.msg.message}
                     emotes={props.msg.emotes}
+                    betterEmotes={props.betterEmotes}
                 />
             </p>
         </div>

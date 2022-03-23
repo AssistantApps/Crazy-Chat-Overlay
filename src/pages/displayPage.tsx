@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { ChatListView } from '../../component/chat/listView';
-import { NetworkState } from '../../constant/networkState';
-import { ChatMessage } from '../../contract/chatMessage';
-import { ChatSetting } from '../../contract/chatSettings';
-import { chatMessageFromTags } from '../../helper/chatMessageHelper';
-import { IDependencyInjection, withServices } from '../../integration/dependencyInjection';
-import { queryParamsToSettings } from '../../mapper/chatSettingHelper';
-import { TwitchDataService } from '../../services/twitchLookupService';
+import { ChatListView } from '../component/chat/listView';
+import { NetworkState } from '../constant/networkState';
+import { ChatMessage } from '../contract/chatMessage';
+import { ChatSetting } from '../contract/chatSettings';
+import { IEmoteLookup } from '../contract/emoteLookup';
+import { chatMessageFromTags } from '../helper/chatMessageHelper';
+import { IDependencyInjection, withServices } from '../integration/dependencyInjection';
+import { queryParamsToSettings } from '../mapper/chatSettingHelper';
+import { TwitchDataService } from '../services/twitchLookupService';
 
 const tmi = require('tmi.js');
 
@@ -22,6 +23,7 @@ interface IProps extends IWithDepInj, IWithoutDepInj { }
 export const DisplayPageUnconnected: React.FC<IProps> = (props: IProps) => {
     const [state, setState] = useState<NetworkState>(NetworkState.Loading);
     const [lookupState, setLookupState] = useState<NetworkState>(NetworkState.Loading);
+    const [emoteLookup, setEmoteLookup] = useState<Array<IEmoteLookup>>([]);
     const [badgeLookup, setBadgeLookup] = useState<any>();
     const [messages, setMessages] = useState<Array<ChatMessage>>([]);
     const [settings] = useState<ChatSetting>(
@@ -63,6 +65,7 @@ export const DisplayPageUnconnected: React.FC<IProps> = (props: IProps) => {
         const lookups = await props.twitchDataService.load(channelName);
 
         setBadgeLookup(lookups.badgeLookup);
+        setEmoteLookup(lookups.emojiLookup);
         setLookupState(NetworkState.Success);
     }
 
@@ -85,6 +88,7 @@ export const DisplayPageUnconnected: React.FC<IProps> = (props: IProps) => {
             <ChatListView
                 messageList={messages}
                 badgeLookup={badgeLookup}
+                betterEmotes={emoteLookup}
                 messageTileType={settings.messageTileType}
             />
         </div>

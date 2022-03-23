@@ -21,6 +21,7 @@ export const DoubleBubbleChatMessageTile: React.FC<IChatMessageTilePresenterProp
                             key={props.msg.message}
                             msg={props.msg.message}
                             emotes={props.msg.emotes}
+                            betterEmotes={props.betterEmotes}
                         />
                     </div>
                 </div>
