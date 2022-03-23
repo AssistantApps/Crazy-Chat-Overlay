@@ -7,7 +7,7 @@ import { UsernameWithBadges } from '../base/usernameWithBadges';
 export const DoubleBubbleChatMessageTile: React.FC<IChatMessageTilePresenterProps> = (props: IChatMessageTilePresenterProps) => {
     return (
         <div key={props.msg.id} className="message-wrapper">
-            <p className="message double-bubble">
+            <div className="message double-bubble">
                 <div className="user">
                     <UsernameWithBadges
                         {...props.msg}
@@ -25,7 +25,7 @@ export const DoubleBubbleChatMessageTile: React.FC<IChatMessageTilePresenterProp
                         />
                     </div>
                 </div>
-            </p>
+            </div>
         </div>
     );
 }

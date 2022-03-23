@@ -1,0 +1,29 @@
+@keyframes message-slide-from-left {
+    from {
+        margin-left: -100vw;
+    }
+
+    to {
+        margin-left: 0vw;
+    }
+}
+
+@keyframes message-slide-from-right {
+    from {
+        margin-left: 100vw;
+    }
+
+    to {
+        margin-left: 0vw;
+    }
+}
+
+@keyframes message-fade-in {
+    from {
+        opacity: 0.01;
+    }
+
+    to {
+        opacity: 0.99;
+    }
+}

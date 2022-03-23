@@ -10,7 +10,7 @@ export class TwitchDataService {
     constructor() {
         this._badgeLookup = anyObject;
         this._badgeForChannelLookup = anyObject;
-        this._emoteBbtvLookup = anyObject;
+        this._emoteBbtvLookup = [];
     }
 
     async load(channelName: string) {
@@ -28,10 +28,9 @@ export class TwitchDataService {
 
         const emoteBbtvLookupResponse = await fetch(`https://api.betterttv.net/3/cached/users/twitch/${uid}`);
         const emoteBbtvLookupResp = await emoteBbtvLookupResponse.json();
-        console.log({ emoteBbtvLookupResp });
         this._emoteBbtvLookup = [
-            ...this.mapEmotes(emoteBbtvLookupResp.channelEmotes, 'https://cdn.betterttv.net/emote/{0}/3x'),
-            ...this.mapEmotes(emoteBbtvLookupResp.sharedEmotes, 'https://cdn.betterttv.net/emote/{0}/3x'),
+            ...this.mapEmotes(emoteBbtvLookupResp.channelEmotes, 'https://cdn.betterttv.net/emote/{0}/1x'),
+            ...this.mapEmotes(emoteBbtvLookupResp.sharedEmotes, 'https://cdn.betterttv.net/emote/{0}/1x'),
         ];
 
         return this.getLookup();
@@ -43,9 +42,9 @@ export class TwitchDataService {
                 ...this._badgeLookup,
                 ...this._badgeForChannelLookup
             },
-            emojiLookup: {
+            emojiLookup: [
                 ...this._emoteBbtvLookup,
-            }
+            ]
         };
     }
 

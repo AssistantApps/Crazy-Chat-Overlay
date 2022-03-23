@@ -1,6 +1,8 @@
 .double-bubble {
     margin: 0.5em;
     padding: 0.35em 0.5em;
+    animation: message-fade-in 1s ease-in-out;
+    width: calc(100% - 1.5em);
 
     .user,
     .message {

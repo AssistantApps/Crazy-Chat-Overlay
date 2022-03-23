@@ -15,15 +15,12 @@ export const queryParamsToSettings = (paramString: string): ChatSetting => {
         .split('&');
 
     let setting = anyObject;
-    console.log(params);
-
     for (const param of params) {
         const parts = param.split('=');
         const paramKey = parts[0];
         const paramValue: any = parts[1];
         if (paramKey !== settingsParamKey) continue;
         setting = JSON.parse(atob(paramValue));
-        console.log(JSON.parse(atob(paramValue)));
     }
 
     // for (const param of params) {

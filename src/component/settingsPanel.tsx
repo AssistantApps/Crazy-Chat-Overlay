@@ -1,65 +1,29 @@
-import { Box, Input, InputGroup, InputRightElement, Select, Text, Textarea, useToast } from '@chakra-ui/react';
+import { Box, Input, InputGroup, InputRightElement, Tag, Text, Textarea, useToast } from '@chakra-ui/react';
 import { CopyIcon } from '@chakra-ui/icons';
 import React from 'react';
-import { MessageTileType } from '../constant/messageTileType';
 import { ChatSetting } from '../contract/chatSettings';
 import { getValue } from '../helper/eventHelper';
 import { settingsToQueryParams } from '../mapper/chatSettingHelper';
 import { siteUrl } from '../constant/site';
 import { Routes } from '../constant/routes';
 import { copyToClipboard } from '../helper/documentHelper';
+import { Dropdown } from './dropdown';
+import { chatAnimationOptions, chatThemeOptions } from '../constant/chatThemes';
+import { hasAnimationDropdown } from '../helper/chatMessageSettingHelper';
 
 interface IProps {
     settings: ChatSetting;
     setSettings: (newSettings: ChatSetting) => void;
 }
 
-const chatThemeOptions = [
-    {
-        type: MessageTileType.Default,
-        isPremium: false,
-    },
-    {
-        type: MessageTileType.Minimalist,
-        isPremium: false,
-    },
-    {
-        type: MessageTileType.ChatApp,
-        name: 'Chat app',
-        isPremium: false,
-    },
-    {
-        type: MessageTileType.DoubleBubble,
-        name: 'Double Bubble',
-        isPremium: false,
-    },
-    {
-        type: MessageTileType.Restream,
-        isPremium: true,
-    },
-    {
-        type: MessageTileType.Tldr,
-        name: 'TLDR',
-        isPremium: false,
-    }
-];
-
 export const SettingsPanel: React.FC<IProps> = (props: IProps) => {
-    const toast = useToast()
+    const toast = useToast();
 
     const channelOnChange = (e: any) => {
         const newValue = getValue(e);
         if (newValue == null) return;
 
         props.setSettings({ ...props.settings, twitchChannel: newValue });
-    }
-
-    const messageTileOnChange = (e: any) => {
-        const newValue = getValue(e);
-        if (newValue == null) return;
-        if (isNaN(newValue as any)) return;
-
-        props.setSettings({ ...props.settings, messageTileType: Number(newValue) });
     }
 
     const displayUrl = siteUrl + '#' + Routes.display + settingsToQueryParams(props.settings);
@@ -88,22 +52,33 @@ export const SettingsPanel: React.FC<IProps> = (props: IProps) => {
             </Box>
             <Box className="theme" mt={5}>
                 <Text>Theme</Text>
-                <Select placeholder='Select option'
-                    data-value={props.settings.messageTileType}
-                    value={props.settings.messageTileType}
-                    onChange={messageTileOnChange}
-                >
-                    {
-                        chatThemeOptions.map((theme, index) => (
-                            <option
-                                key={index}
-                                value={index}
-                            >
-                                {theme.name ?? MessageTileType[theme.type].toString()}
-                            </option>
-                        ))
-                    }
-                </Select>
+                <Dropdown
+                    defaultFirstItem={true}
+                    placeholder="Select option"
+                    options={chatThemeOptions.map(theme => ({
+                        name: theme.name,
+                        value: theme.type.toString(),
+                        aditional: theme,
+                    }))}
+                    onChange={(selectedOption) => {
+                        props.setSettings({ ...props.settings, messageTileType: Number(selectedOption.value) });
+                    }}
+                    trailingPresenter={(selectedOption) => {
+                        if (selectedOption.aditional.isPremium !== true) return null;
+                        return (<Tag variant='solid' colorScheme='purple'>Premium</Tag>);
+                    }}
+                />
+            </Box>
+            <Box mt={5} style={hasAnimationDropdown(props.settings.messageTileType)}>
+                <Text>New message animation</Text>
+                <Dropdown
+                    defaultFirstItem={true}
+                    placeholder="Select option"
+                    options={chatAnimationOptions}
+                    onChange={(selectedOption) => {
+                        // props.setSettings({ ...props.settings, messageTileType: Number(selectedOption.value) });
+                    }}
+                />
             </Box>
             <Box className="url" mt={5}>
                 <Text>Overlay url</Text>

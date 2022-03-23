@@ -2,9 +2,10 @@
 @import "./functions";
 @import "./layout";
 @import "./message";
+@import "./dropdown";
 
 body {
-  background-color: #282c34;
+  background-color: $background-colour;
   color: #ffffff;
 }
 

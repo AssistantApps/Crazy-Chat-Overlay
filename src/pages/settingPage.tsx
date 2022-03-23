@@ -98,7 +98,7 @@ export const SettingPage: React.FC = () => {
             </Box>
             <Box flexGrow={1} style={{ height: '100%', maxWidth: '400px' }}>
                 <ChatListView
-                    betterEmotes={anyObject}
+                    betterEmotes={[]}
                     badgeLookup={anyObject}
                     messageList={messages}
                     messageTileType={settings.messageTileType}

@@ -1,3 +1,4 @@
+@import "tiles/animations";
 @import "tiles/defaultTile";
 @import "tiles/chatAppTile";
 @import "tiles/doubleBubbleChatAppTile";
@@ -16,15 +17,9 @@
     img {
         display: inline-block;
         margin: 0 0.1em -0.2em 0.1em;
-    }
-}
 
-@keyframes message-incomming {
-    from {
-        margin-left: -100vw;
-    }
-
-    to {
-        margin-left: 0vw;
+        &.bttv {
+            margin-bottom: -0.5em;
+        }
     }
 }
