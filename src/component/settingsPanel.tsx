@@ -19,11 +19,11 @@ interface IProps {
 export const SettingsPanel: React.FC<IProps> = (props: IProps) => {
     const toast = useToast();
 
-    const channelOnChange = (e: any) => {
+    const channelOnChange = (prop: string) => (e: any) => {
         const newValue = getValue(e);
         if (newValue == null) return;
 
-        props.setSettings({ ...props.settings, twitchChannel: newValue });
+        props.setSettings({ ...props.settings, [prop]: newValue });
     }
 
     const displayUrl = siteUrl + '#' + Routes.display + settingsToQueryParams(props.settings);
@@ -47,7 +47,16 @@ export const SettingsPanel: React.FC<IProps> = (props: IProps) => {
                     variant='outline'
                     placeholder='khaoztopsy'
                     defaultValue={props.settings.twitchChannel}
-                    onChange={channelOnChange}
+                    onChange={channelOnChange('twitchChannel')}
+                />
+            </Box>
+            <Box className="channel" mt={5}>
+                <Text>Youtube channel id</Text>
+                <Input
+                    variant='outline'
+                    placeholder='khaoztopsy'
+                    defaultValue={props.settings.youtubeChannel}
+                    onChange={channelOnChange('youtubeChannel')}
                 />
             </Box>
             <Box className="theme" mt={5}>
