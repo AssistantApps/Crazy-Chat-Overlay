@@ -50,7 +50,7 @@ export const SettingsPanel: React.FC<IProps> = (props: IProps) => {
                     onChange={channelOnChange('twitchChannel')}
                 />
             </Box>
-            <Box className="channel" mt={5}>
+            {/* <Box className="channel" mt={5}>
                 <Text>Youtube channel id</Text>
                 <Input
                     variant='outline'
@@ -58,7 +58,7 @@ export const SettingsPanel: React.FC<IProps> = (props: IProps) => {
                     defaultValue={props.settings.youtubeChannel}
                     onChange={channelOnChange('youtubeChannel')}
                 />
-            </Box>
+            </Box> */}
             <Box className="theme" mt={5}>
                 <Text>Theme</Text>
                 <Dropdown

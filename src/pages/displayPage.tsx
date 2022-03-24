@@ -4,10 +4,8 @@ import { NetworkState } from '../constant/networkState';
 import { ChatMessage } from '../contract/chatMessage';
 import { ChatSetting } from '../contract/chatSettings';
 import { IEmoteLookup } from '../contract/emoteLookup';
-import { chatMessageFromTwitchTags, chatMessageFromYoutube } from '../helper/chatMessageHelper';
+import { chatMessageFromTwitchTags } from '../helper/chatMessageHelper';
 import { getTwitchClient } from '../helper/twitchHelper';
-import { anyObject } from '../helper/typescriptHacks';
-import { getYoutubeClient } from '../helper/youtubeHelper';
 import { IDependencyInjection, withServices } from '../integration/dependencyInjection';
 import { queryParamsToSettings } from '../mapper/chatSettingHelper';
 import { TwitchDataService } from '../services/twitchLookupService';
@@ -24,12 +22,12 @@ interface IProps extends IWithDepInj, IWithoutDepInj { }
 
 export const DisplayPageUnconnected: React.FC<IProps> = (props: IProps) => {
     const [state, setState] = useState<NetworkState>(NetworkState.Loading);
-    const [lookupState, setLookupState] = useState<NetworkState>(NetworkState.Loading);
+    const [lookupState, setLookupState] = useState<NetworkState>(NetworkState.Success);
     const [emoteLookup, setEmoteLookup] = useState<Array<IEmoteLookup>>([]);
     const [badgeLookup, setBadgeLookup] = useState<any>();
     const [messages, setMessages] = useState<Array<ChatMessage>>([]);
     const [settings] = useState<ChatSetting>(
-        queryParamsToSettings(window.location.hash)
+        queryParamsToSettings(window.location?.hash)
     );
 
     useEffect(() => {
@@ -39,7 +37,7 @@ export const DisplayPageUnconnected: React.FC<IProps> = (props: IProps) => {
         let youtubeClientDisconnect = () => { };
 
         const hasTwitch = settings.twitchChannel != null && settings.twitchChannel.length > 2;
-        const hasYoutube = settings.youtubeChannel != null && settings.youtubeChannel.length > 2;
+        // const hasYoutube = settings.youtubeChannel != null && settings.youtubeChannel.length > 2;
 
         if (hasTwitch) {
             loadLookups(settings.twitchChannel);
@@ -55,25 +53,25 @@ export const DisplayPageUnconnected: React.FC<IProps> = (props: IProps) => {
             twitchClientDisconnect = () => twitchClient.disconnect();
         }
 
-        if (hasYoutube) {
-            const youtubeClient = getYoutubeClient(settings.youtubeChannel,
-                () => setState(NetworkState.Success),
-                () => setState(NetworkState.Error),
-                (chatItem: any) => {
-                    const newMessage = chatMessageFromYoutube(chatItem);
-                    addToMessageArray(newMessage);
-                }
-            );
+        // if (hasYoutube) {
+        //     const youtubeClient = getYoutubeClient(settings.youtubeChannel,
+        //         () => setState(NetworkState.Success),
+        //         () => setState(NetworkState.Error),
+        //         (chatItem: any) => {
+        //             const newMessage = chatMessageFromYoutube(chatItem);
+        //             addToMessageArray(newMessage);
+        //         }
+        //     );
 
-            youtubeClient.start().then(resp => {
-                setState(NetworkState.Success);
-            }).catch((e: any) => {
-                console.error(e);
-                setState(NetworkState.Error);
-            });
+        //     youtubeClient.start().then(resp => {
+        //         setState(NetworkState.Success);
+        //     }).catch((e: any) => {
+        //         console.error(e);
+        //         setState(NetworkState.Error);
+        //     });
 
-            youtubeClientDisconnect = () => youtubeClient.stop();
-        }
+        //     youtubeClientDisconnect = () => youtubeClient.stop();
+        // }
 
         return () => {
             twitchClientDisconnect();
@@ -83,10 +81,13 @@ export const DisplayPageUnconnected: React.FC<IProps> = (props: IProps) => {
     }, []);
 
     const loadLookups = async (channelName: string) => {
-        const lookups = await props.twitchDataService.load(channelName);
+        try {
+            const lookups = await props.twitchDataService.load(channelName);
+            setBadgeLookup(lookups.badgeLookup);
+            setEmoteLookup(lookups.emojiLookup);
+        }
+        catch (e: any) { }
 
-        setBadgeLookup(lookups.badgeLookup);
-        setEmoteLookup(lookups.emojiLookup);
         setLookupState(NetworkState.Success);
     }
 
