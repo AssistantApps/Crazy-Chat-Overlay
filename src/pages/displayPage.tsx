@@ -89,7 +89,7 @@ export const DisplayPageUnconnected: React.FC<IProps> = (props: IProps) => {
                 messageList={messages}
                 badgeLookup={badgeLookup}
                 betterEmotes={emoteLookup}
-                messageTileType={settings.messageTileType}
+                settings={settings}
             />
         </div>
     );

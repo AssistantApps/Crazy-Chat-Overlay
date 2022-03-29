@@ -1,4 +1,5 @@
 import React from 'react';
+import { ChatMessage } from '../base/chatMessage';
 import { MessageWithEmojis } from '../base/messageWithEmojis';
 import { UsernameWithBadges } from '../base/usernameWithBadges';
 import { IChatMessageTilePresenterProps } from './chatMessageProps';
@@ -6,8 +7,8 @@ import { IChatMessageTilePresenterProps } from './chatMessageProps';
 
 export const TldrChatMessageTile: React.FC<IChatMessageTilePresenterProps> = (props: IChatMessageTilePresenterProps) => {
     return (
-        <div key={props.msg.id} className="message-wrapper">
-            <p className="message tldr">
+        <div key={props.msg.id} data-id="TldrChatMessageTile" className="message-wrapper">
+            <ChatMessage settings={props.settings}>
                 <UsernameWithBadges
                     {...props.msg}
                     badgeLookup={props.badgeLookup}
@@ -19,7 +20,7 @@ export const TldrChatMessageTile: React.FC<IChatMessageTilePresenterProps> = (pr
                     emotes={props.msg.emotes}
                     betterEmotes={props.betterEmotes}
                 />
-            </p>
+            </ChatMessage>
         </div>
     );
 }

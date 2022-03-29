@@ -1,16 +1,28 @@
-import { IDropDownOptionProps } from "../contract/props/IDropDownOptionProps";
 import { MessageTileType } from "./messageTileType";
 
+interface IThemeOptions {
+    type: MessageTileType;
+    name: string;
+    isPremium: boolean;
+    defaultAnimation?: string;
+}
 
-export const chatThemeOptions = [
-    {
-        type: MessageTileType.Default,
-        name: 'Default',
-        isPremium: false,
-    },
+export const defaultTheme: IThemeOptions = {
+    type: MessageTileType.Default,
+    name: 'Default',
+    isPremium: false,
+};
+
+export const chatThemeOptions: Array<IThemeOptions> = [
+    defaultTheme,
     {
         type: MessageTileType.Minimalist,
         name: 'Minimalist',
+        isPremium: false,
+    },
+    {
+        type: MessageTileType.Tldr,
+        name: 'TLDR',
         isPremium: false,
     },
     {
@@ -27,29 +39,5 @@ export const chatThemeOptions = [
         type: MessageTileType.Restream,
         name: 'Restream',
         isPremium: true,
-    },
-    {
-        type: MessageTileType.Tldr,
-        name: 'TLDR',
-        isPremium: false,
     }
-];
-
-export const chatAnimationOptions: Array<IDropDownOptionProps> = [
-    {
-        name: 'Fade in',
-        value: 'message-fade-in',
-    },
-    {
-        name: 'Slide in from left',
-        value: 'message-slide-from-left',
-    },
-    {
-        name: 'Slide in from right',
-        value: 'message-slide-from-right',
-    },
-    {
-        name: 'None',
-        value: 'none',
-    },
 ];

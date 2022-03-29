@@ -1,4 +1,8 @@
-.restream-tile {
+.message-list .Restream.message {
+    width: calc(100% - 1em);
+}
+
+.message-list .Restream.message {
     margin: 0.5em;
     display: flex;
     padding: 1em 1em 1em 0.5em;

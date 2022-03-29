@@ -1,4 +1,8 @@
-.chat-app-tile {
+.message-list .ChatApp.message {
+    width: calc(100% - 1em);
+}
+
+.ChatApp {
     margin: 0.5em;
     background: rgb(3, 124, 255);
     background: linear-gradient(45deg, rgba(3, 124, 255, 1) 0%, rgba(15, 132, 255, 1) 100%);

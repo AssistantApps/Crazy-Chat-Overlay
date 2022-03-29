@@ -1,5 +1,4 @@
 @import "tiles/animations";
-@import "tiles/defaultTile";
 @import "tiles/chatAppTile";
 @import "tiles/doubleBubbleChatAppTile";
 @import "tiles/restream";
@@ -22,4 +21,16 @@
             margin-bottom: -0.5em;
         }
     }
+
+    .message {
+        width: 100%;
+        // animation-name: message-fade-in;
+        animation-duration: 1s;
+        animation-timing-function: ease-in-out;
+    }
+}
+
+.default-tile {
+    margin: 0.5em 0;
+    max-width: 100%;
 }

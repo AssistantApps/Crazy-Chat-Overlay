@@ -6,19 +6,23 @@ import { IDropDownOptionProps } from '../contract/props/IDropDownOptionProps';
 
 export interface IDropdownProps {
     placeholder: string;
-    defaultFirstItem?: boolean;
+    defaultToPlaceholder?: boolean;
     options: Array<IDropDownOptionProps>;
+    defaultValue?: string;
     onChange: (opt: IDropDownOptionProps) => void;
     trailingPresenter?: (opt: IDropDownOptionProps) => ReactNode;
 }
 
 
 export const Dropdown: React.FC<IDropdownProps> = (props: IDropdownProps) => {
-    const [selectedIndex, setSelectedIndex] = useState<number>(0);
+    const defaultSelectedIndex = props.options.findIndex(opt => opt.value === props.defaultValue);
+    const calculatedIndex = defaultSelectedIndex < 0 ? 0 : defaultSelectedIndex;
+
+    const [selectedIndex, setSelectedIndex] = useState<number>(calculatedIndex);
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     let displayValue = props.options[selectedIndex].name;
-    if (props.defaultFirstItem !== true && selectedIndex === 0) {
+    if (props.defaultToPlaceholder === true && props.defaultValue == null) {
         displayValue = props.placeholder;
     }
 

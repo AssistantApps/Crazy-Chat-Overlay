@@ -13,6 +13,10 @@ body {
   cursor: pointer;
 }
 
+.not-visible {
+  display: none;
+}
+
 *::-webkit-scrollbar {
   display: none;
 }

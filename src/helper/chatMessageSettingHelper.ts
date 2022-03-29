@@ -1,12 +1,25 @@
+import { defaultChatAnimation } from "../constant/chatAnimations";
+import { chatThemeOptions, defaultTheme } from "../constant/chatThemes";
 import { MessageTileType } from "../constant/messageTileType";
-import { anyObject } from "./typescriptHacks";
-
-const displayNone = { display: 'none' }
+import { ChatSetting, ChatSettingAdditionalKey } from "../contract/chatSettings";
 
 export const hasAnimationDropdown = (messageTileType: MessageTileType): any => {
-    // if ([
-    //     MessageTileType.Default
-    // ].includes(messageTileType)) return anyObject;
+    if ([
+        MessageTileType.Default,
+        MessageTileType.ChatApp,
+        MessageTileType.DoubleBubble,
+        MessageTileType.Restream,
+    ].includes(messageTileType)) return true;
 
-    return displayNone;
+    return false;
+}
+
+export const getAnimationValue = (settings: ChatSetting) => {
+    const existingValue = settings.additional[ChatSettingAdditionalKey.animation];
+    if (existingValue != null) return existingValue;
+
+    const currentTheme = chatThemeOptions.find(c => c.type === settings.messageTileType) ?? defaultTheme;
+    if (currentTheme.defaultAnimation != null) return currentTheme.defaultAnimation;
+
+    return defaultChatAnimation.value;
 }

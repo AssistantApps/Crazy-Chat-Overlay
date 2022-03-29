@@ -28,8 +28,10 @@ export const SettingPage: React.FC = () => {
         '#ff0000',
         '#00ff00',
         '#000000',
-        'purple',
         'orange',
+        'purple',
+        'green',
+        'pink',
     ];
 
     const profilePics = [
@@ -71,7 +73,7 @@ export const SettingPage: React.FC = () => {
     }
 
     const generateMessage = (): ChatMessage => {
-        const msgMessage = jabber.createParagraph(Math.floor(Math.random() * 20) + 3);
+        const msgMessage = jabber.createParagraph(Math.floor(Math.random() * 10) + 3);
         const newMessage: ChatMessage = {
             id: msgMessage,
             userId: profilePics[Math.floor(Math.random() * profilePics.length)],
@@ -101,7 +103,7 @@ export const SettingPage: React.FC = () => {
                     betterEmotes={[]}
                     badgeLookup={anyObject}
                     messageList={messages}
-                    messageTileType={settings.messageTileType}
+                    settings={settings}
                 />
             </Box>
         </Flex>

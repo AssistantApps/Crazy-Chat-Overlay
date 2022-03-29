@@ -1,6 +1,7 @@
 import React from 'react';
 import { formatDate } from '../../../helper/dateHelper';
 import { LazyLoadImage } from '../../lazyLoadImage/lazyLoadImage';
+import { ChatMessage } from '../base/chatMessage';
 import { MessageWithEmojis } from '../base/messageWithEmojis';
 import { UsernameWithBadges } from '../base/usernameWithBadges';
 import { IChatMessageTilePresenterProps } from './chatMessageProps';
@@ -8,8 +9,8 @@ import { IChatMessageTilePresenterProps } from './chatMessageProps';
 
 export const RestreamChatMessageTile: React.FC<IChatMessageTilePresenterProps> = (props: IChatMessageTilePresenterProps) => {
     return (
-        <div key={props.msg.id} className="message-wrapper">
-            <div className="restream-tile">
+        <div key={props.msg.id} data-id="RestreamChatMessageTile" className="message-wrapper">
+            <ChatMessage settings={props.settings}>
                 <div className="avatar">
                     <LazyLoadImage
                         src={`https://api.assistantapps.com/Twitch/UserImage/${props.msg.userId}`}
@@ -34,7 +35,7 @@ export const RestreamChatMessageTile: React.FC<IChatMessageTilePresenterProps> =
                         betterEmotes={props.betterEmotes}
                     />
                 </div>
-            </div>
+            </ChatMessage>
         </div>
     );
 }

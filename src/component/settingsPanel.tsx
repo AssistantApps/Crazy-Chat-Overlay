@@ -1,15 +1,18 @@
 import { Box, Input, InputGroup, InputRightElement, Tag, Text, Textarea, useToast } from '@chakra-ui/react';
 import { CopyIcon } from '@chakra-ui/icons';
 import React from 'react';
-import { ChatSetting } from '../contract/chatSettings';
+
+import { ChatSetting, ChatSettingAdditionalKey } from '../contract/chatSettings';
 import { getValue } from '../helper/eventHelper';
 import { settingsToQueryParams } from '../mapper/chatSettingHelper';
 import { siteUrl } from '../constant/site';
 import { Routes } from '../constant/routes';
 import { copyToClipboard } from '../helper/documentHelper';
 import { Dropdown } from './dropdown';
-import { chatAnimationOptions, chatThemeOptions } from '../constant/chatThemes';
-import { hasAnimationDropdown } from '../helper/chatMessageSettingHelper';
+import { chatThemeOptions } from '../constant/chatThemes';
+import { getAnimationValue, hasAnimationDropdown } from '../helper/chatMessageSettingHelper';
+import { chatAnimationOptions } from '../constant/chatAnimations';
+import classNames from 'classnames';
 
 interface IProps {
     settings: ChatSetting;
@@ -39,6 +42,16 @@ export const SettingsPanel: React.FC<IProps> = (props: IProps) => {
         }
     }
 
+    const setAdditionalProperty = (key: string, value: string) => {
+        props.setSettings({
+            ...props.settings,
+            additional: {
+                ...props.settings.additional,
+                [key]: value,
+            }
+        });
+    }
+
     return (
         <Box>
             <Box className="channel" mt={5}>
@@ -53,7 +66,6 @@ export const SettingsPanel: React.FC<IProps> = (props: IProps) => {
             <Box className="theme" mt={5}>
                 <Text>Theme</Text>
                 <Dropdown
-                    defaultFirstItem={true}
                     placeholder="Select option"
                     options={chatThemeOptions.map(theme => ({
                         name: theme.name,
@@ -69,14 +81,14 @@ export const SettingsPanel: React.FC<IProps> = (props: IProps) => {
                     }}
                 />
             </Box>
-            <Box mt={5} style={hasAnimationDropdown(props.settings.messageTileType)}>
+            <Box mt={5} className={classNames({ 'not-visible': !hasAnimationDropdown(props.settings.messageTileType) })}>
                 <Text>New message animation</Text>
                 <Dropdown
-                    defaultFirstItem={true}
                     placeholder="Select option"
                     options={chatAnimationOptions}
+                    defaultValue={getAnimationValue(props.settings)}
                     onChange={(selectedOption) => {
-                        // props.setSettings({ ...props.settings, messageTileType: Number(selectedOption.value) });
+                        setAdditionalProperty(ChatSettingAdditionalKey.animation, selectedOption.value);
                     }}
                 />
             </Box>

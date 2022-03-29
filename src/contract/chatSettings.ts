@@ -5,3 +5,8 @@ export interface ChatSetting {
     messageTileType: MessageTileType;
     additional: Record<string, string>
 }
+
+
+export const ChatSettingAdditionalKey = {
+    animation: 'animation'
+}

@@ -1,3 +1,4 @@
+import { ApiUrl } from "../constant/apiUrl";
 import { IEmoteLookup } from "../contract/emoteLookup";
 import { anyObject } from "../helper/typescriptHacks";
 
@@ -14,24 +15,36 @@ export class TwitchDataService {
     }
 
     async load(channelName: string) {
-        const channelResponse = await fetch(`https://dadoschyt.de/api/tmt/user/${channelName}`);
+        const channelTask = fetch(ApiUrl.AssistantAppGetTwitchData(channelName));
+
+        const channelResponse = await channelTask;
         const channel = await channelResponse.json();
-        const uid = channel.data[0].id;
+        const uid = channel.id;
 
-        const badgeLookupResponse = await fetch('https://badges.twitch.tv/v1/badges/global/display');
-        const badgeLookupResp = await badgeLookupResponse.json();
-        this._badgeLookup = badgeLookupResp['badge_sets'];
+        const badgeLookupTask = fetch(ApiUrl.GlobalBadges);
+        const badgeForChannelLookupTask = fetch(ApiUrl.ChannelBadges(uid));
+        const emoteBbtvLookupTask = fetch(ApiUrl.BetterTtvBadges(uid));
 
-        const badgeForChannelLookupResponse = await fetch(`https://badges.twitch.tv/v1/badges/channels/${uid}/display`);
-        const badgeForChannelLookupResp = await badgeForChannelLookupResponse.json();
-        this._badgeForChannelLookup = badgeForChannelLookupResp['badge_sets'];
-
-        const emoteBbtvLookupResponse = await fetch(`https://api.betterttv.net/3/cached/users/twitch/${uid}`);
-        const emoteBbtvLookupResp = await emoteBbtvLookupResponse.json();
-        this._emoteBbtvLookup = [
-            ...this.mapEmotes(emoteBbtvLookupResp.channelEmotes, 'https://cdn.betterttv.net/emote/{0}/1x'),
-            ...this.mapEmotes(emoteBbtvLookupResp.sharedEmotes, 'https://cdn.betterttv.net/emote/{0}/1x'),
-        ];
+        await Promise.all([
+            async () => {
+                const badgeLookupResponse = await badgeLookupTask;
+                const badgeLookupResp = await badgeLookupResponse.json();
+                this._badgeLookup = badgeLookupResp['badge_sets'];
+            },
+            async () => {
+                const badgeForChannelLookupResponse = await badgeForChannelLookupTask;
+                const badgeForChannelLookupResp = await badgeForChannelLookupResponse.json();
+                this._badgeForChannelLookup = badgeForChannelLookupResp['badge_sets'];
+            },
+            async () => {
+                const emoteBbtvLookupResponse = await emoteBbtvLookupTask;
+                const emoteBbtvLookupResp = await emoteBbtvLookupResponse.json();
+                this._emoteBbtvLookup = [
+                    ...this.mapEmotes(emoteBbtvLookupResp.channelEmotes, ApiUrl.BetterTtvEmoteUrlTemplate),
+                    ...this.mapEmotes(emoteBbtvLookupResp.sharedEmotes, ApiUrl.BetterTtvEmoteUrlTemplate),
+                ];
+            }
+        ]);
 
         return this.getLookup();
     }
