@@ -1,7 +1,8 @@
 import { ChatMessage } from "../contract/chatMessage";
+import { ChatItem } from "youtube-chat/dist/types/data";
 
-export const chatMessageFromTags = (channel: string, tags: any, message: any, self: any) => {
-    console.log(message, tags);
+export const chatMessageFromTwitchTags = (channel: string, tags: any, message: any, self: any) => {
+    // console.log(message, tags);
     const newMessage: ChatMessage = {
         id: tags.id,
         userId: tags['user-id'],
@@ -29,3 +30,20 @@ reply-parent-user-login: "jaspelino"
 
 tmi-sent-ts: "1647649836976"
  */
+
+export const chatMessageFromYoutube = (chatItem: ChatItem) => {
+    // console.log(message, tags);
+    const newMessage: ChatMessage = {
+        id: chatItem.timestamp.toString(),
+        userId: chatItem.author.channelId,
+        username: chatItem.author.name,
+        profilePic: chatItem.author.thumbnail?.url,
+        mod: chatItem.isModerator,
+        subscriber: chatItem.isMembership,
+        emotes: [],
+        message: chatItem.message.join(', '),
+        date: chatItem.timestamp,
+    };
+
+    return newMessage;
+}

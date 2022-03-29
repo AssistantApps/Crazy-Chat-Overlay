@@ -16,6 +16,7 @@ export const SettingPage: React.FC = () => {
     const [messages, setMessages] = useState<Array<ChatMessage>>([]);
     const [settings, setSettings] = useState<ChatSetting>({
         twitchChannel: 'khaoztopsy',
+        // youtubeChannel: '',
         messageTileType: MessageTileType.Default,
         additional: anyObject,
     });

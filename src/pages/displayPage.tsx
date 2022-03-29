@@ -4,12 +4,12 @@ import { NetworkState } from '../constant/networkState';
 import { ChatMessage } from '../contract/chatMessage';
 import { ChatSetting } from '../contract/chatSettings';
 import { IEmoteLookup } from '../contract/emoteLookup';
-import { chatMessageFromTags } from '../helper/chatMessageHelper';
+import { chatMessageFromTwitchTags } from '../helper/chatMessageHelper';
+import { getTwitchClient } from '../helper/twitchHelper';
 import { IDependencyInjection, withServices } from '../integration/dependencyInjection';
 import { queryParamsToSettings } from '../mapper/chatSettingHelper';
 import { TwitchDataService } from '../services/twitchLookupService';
 
-const tmi = require('tmi.js');
 
 const maxNumMessages = 25;
 
@@ -22,50 +22,72 @@ interface IProps extends IWithDepInj, IWithoutDepInj { }
 
 export const DisplayPageUnconnected: React.FC<IProps> = (props: IProps) => {
     const [state, setState] = useState<NetworkState>(NetworkState.Loading);
-    const [lookupState, setLookupState] = useState<NetworkState>(NetworkState.Loading);
+    const [lookupState, setLookupState] = useState<NetworkState>(NetworkState.Success);
     const [emoteLookup, setEmoteLookup] = useState<Array<IEmoteLookup>>([]);
     const [badgeLookup, setBadgeLookup] = useState<any>();
     const [messages, setMessages] = useState<Array<ChatMessage>>([]);
     const [settings] = useState<ChatSetting>(
-        queryParamsToSettings(window.location.hash)
+        queryParamsToSettings(window.location?.hash)
     );
 
     useEffect(() => {
         document.getElementById('header')?.remove?.();
-        const channelName = settings.twitchChannel ?? 'khaoztopsy';
-        loadLookups(channelName);
-        const client = new tmi.Client({
-            options: { debug: true, messagesLogLevel: "info" },
-            connection: {
-                reconnect: true,
-                secure: true
-            },
-            channels: [channelName]
-        });
 
-        client.connect().then(() => {
-            setState(NetworkState.Success)
-        }).catch((e: any) => {
-            console.error(e);
-            setState(NetworkState.Success)
-        });
+        let twitchClientDisconnect = () => { };
+        let youtubeClientDisconnect = () => { };
 
-        client.on('message', (channel: any, tags: any, message: any, self: any) => {
-            const newMessage = chatMessageFromTags(channel, tags, message, self);
-            addToMessageArray(newMessage);
-        });
+        const hasTwitch = settings.twitchChannel != null && settings.twitchChannel.length > 2;
+        // const hasYoutube = settings.youtubeChannel != null && settings.youtubeChannel.length > 2;
+
+        if (hasTwitch) {
+            loadLookups(settings.twitchChannel);
+            const twitchClient = getTwitchClient(settings.twitchChannel,
+                () => setState(NetworkState.Success),
+                () => setState(NetworkState.Error),
+                (channel: any, tags: any, message: any, self: any) => {
+                    const newMessage = chatMessageFromTwitchTags(channel, tags, message, self);
+                    addToMessageArray(newMessage);
+                }
+            );
+
+            twitchClientDisconnect = () => twitchClient.disconnect();
+        }
+
+        // if (hasYoutube) {
+        //     const youtubeClient = getYoutubeClient(settings.youtubeChannel,
+        //         () => setState(NetworkState.Success),
+        //         () => setState(NetworkState.Error),
+        //         (chatItem: any) => {
+        //             const newMessage = chatMessageFromYoutube(chatItem);
+        //             addToMessageArray(newMessage);
+        //         }
+        //     );
+
+        //     youtubeClient.start().then(resp => {
+        //         setState(NetworkState.Success);
+        //     }).catch((e: any) => {
+        //         console.error(e);
+        //         setState(NetworkState.Error);
+        //     });
+
+        //     youtubeClientDisconnect = () => youtubeClient.stop();
+        // }
 
         return () => {
-            client.disconnect('bye bye');
+            twitchClientDisconnect();
+            youtubeClientDisconnect();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const loadLookups = async (channelName: string) => {
-        const lookups = await props.twitchDataService.load(channelName);
+        try {
+            const lookups = await props.twitchDataService.load(channelName);
+            setBadgeLookup(lookups.badgeLookup);
+            setEmoteLookup(lookups.emojiLookup);
+        }
+        catch (e: any) { }
 
-        setBadgeLookup(lookups.badgeLookup);
-        setEmoteLookup(lookups.emojiLookup);
         setLookupState(NetworkState.Success);
     }
 
