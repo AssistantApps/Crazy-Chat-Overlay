@@ -1,7 +1,9 @@
+import classNames from 'classnames';
 import React, { useEffect, useRef } from 'react';
 import { ChatMessage } from '../../contract/chatMessage';
 import { ChatSetting } from '../../contract/chatSettings';
 import { IEmoteLookup } from '../../contract/emoteLookup';
+import { getAnimationValue, hasAnimationDropdown } from '../../helper/chatMessageSettingHelper';
 import { chatMessageTileFactory } from './chatMessageTileFactory';
 import { IChatMessageTilePresenterProps } from './tile/chatMessageProps';
 
@@ -22,8 +24,19 @@ export const ChatListView: React.FC<IProps> = (props: IProps) => {
 
     const ChatMessageTilePresenter: React.FC<IChatMessageTilePresenterProps> = chatMessageTileFactory(props.settings.messageTileType);
 
+
+    const getMessageClasses = (settings: ChatSetting): Array<string> => {
+        const result: Array<any> = [];
+
+        if (hasAnimationDropdown(settings.messageTileType)) {
+            result.push('animation-name-' + getAnimationValue(settings));
+        }
+
+        return result;
+    }
+
     return (
-        <div className="message-list">
+        <div className={classNames('message-list', getMessageClasses(props.settings))}>
             {
                 props.messageList.map((chatM, i) => (
                     <ChatMessageTilePresenter

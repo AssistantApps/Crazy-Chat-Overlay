@@ -27,3 +27,15 @@
         opacity: 0.99;
     }
 }
+
+.message-list {
+    &.animation-name-message-slide-from-left .message {
+        animation-name: message-slide-from-left;
+    }
+    &.animation-name-message-slide-from-right .message {
+        animation-name: message-slide-from-right;
+    }
+    &.animation-name-message-fade-in .message {
+        animation-name: message-fade-in;
+    }
+}
