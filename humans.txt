@@ -5,7 +5,7 @@ Twitter: @KhaozTopsy
 From: Almere, The Netherlands
 
 /* SITE */
-Last update: 2022-03-23
+Last update: 2022-03-31
 Language: English
 Doctype:HTML5
 IDE: Visual Studio Code
