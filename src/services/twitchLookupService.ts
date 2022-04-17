@@ -25,28 +25,23 @@ export class TwitchDataService {
         const badgeForChannelLookupTask = fetch(ApiUrl.ChannelBadges(uid));
         const emoteBbtvLookupTask = fetch(ApiUrl.BetterTtvBadges(uid));
 
-        await Promise.all([
-            async () => {
-                const badgeLookupResponse = await badgeLookupTask;
-                const badgeLookupResp = await badgeLookupResponse.json();
-                this._badgeLookup = badgeLookupResp['badge_sets'];
-            },
-            async () => {
-                const badgeForChannelLookupResponse = await badgeForChannelLookupTask;
-                const badgeForChannelLookupResp = await badgeForChannelLookupResponse.json();
-                this._badgeForChannelLookup = badgeForChannelLookupResp['badge_sets'];
-            },
-            async () => {
-                const emoteBbtvLookupResponse = await emoteBbtvLookupTask;
-                const emoteBbtvLookupResp = await emoteBbtvLookupResponse.json();
-                this._emoteBbtvLookup = [
-                    ...this.mapEmotes(emoteBbtvLookupResp.channelEmotes, ApiUrl.BetterTtvEmoteUrlTemplate),
-                    ...this.mapEmotes(emoteBbtvLookupResp.sharedEmotes, ApiUrl.BetterTtvEmoteUrlTemplate),
-                ];
-            }
-        ]);
+        const badgeLookupResponse = await badgeLookupTask;
+        const badgeLookupResp = await badgeLookupResponse.json();
+        this._badgeLookup = badgeLookupResp['badge_sets'];
 
-        return this.getLookup();
+        const badgeForChannelLookupResponse = await badgeForChannelLookupTask;
+        const badgeForChannelLookupResp = await badgeForChannelLookupResponse.json();
+        this._badgeForChannelLookup = badgeForChannelLookupResp['badge_sets'];
+
+        const emoteBbtvLookupResponse = await emoteBbtvLookupTask;
+        const emoteBbtvLookupResp = await emoteBbtvLookupResponse.json();
+        this._emoteBbtvLookup = [
+            ...this.mapEmotes(emoteBbtvLookupResp.channelEmotes, ApiUrl.BetterTtvEmoteUrlTemplate),
+            ...this.mapEmotes(emoteBbtvLookupResp.sharedEmotes, ApiUrl.BetterTtvEmoteUrlTemplate),
+        ];
+
+        const badges = await this.getLookup();
+        return badges;
     }
 
     async getLookup() {
